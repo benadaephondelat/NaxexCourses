@@ -227,6 +227,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ManageCoursesController.cs" />
     <Compile Include="FrameworkExtentions\AntiForgeryTokenHelper.cs" />
+    <Compile Include="FrameworkExtentions\CheckIfLoggedInFilter.cs" />
     <Compile Include="FrameworkExtentions\CheckModelState.cs" />
     <Compile Include="FrameworkExtentions\Mappings\AutoMapperConfig.cs" />
     <Compile Include="FrameworkExtentions\Mappings\AutoMapperExtensions.cs" />

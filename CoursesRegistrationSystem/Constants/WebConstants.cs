@@ -8,6 +8,14 @@
 
         public const string EditCoursesView = "EditCourses";
 
+        public const string EditCoursesAction = "EditCourses";
+
         public const string CoursesGridPartialView = "_EditCoursesGrid";
+
+        public const string EditUserCourseView = "EditUserCourse";
+
+        public const string ManageCoursesController = "ManageCourses";
+
+        public const string RedirectType = "Redirect";
     }
 }

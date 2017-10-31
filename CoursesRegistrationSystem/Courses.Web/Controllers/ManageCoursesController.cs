@@ -11,6 +11,7 @@
     using AutoMapper;
     using global::Models;
 
+    [CheckIfLoggedInFilter]
     public class ManageCoursesController : BaseController
     {
         private readonly ICoursesService coursesService;
@@ -74,8 +75,8 @@
         {
             var result = new
             {
-                result = "Redirect",
-                url = Url.Action("EditUserCourse", "ManageCourses",
+                result = WebConstants.RedirectType,
+                url = Url.Action(WebConstants.EditCoursesAction, WebConstants.ManageCoursesController,
                 new { @courseId = courseId })
             };
 
@@ -91,7 +92,7 @@
 
             EditUserCourseModel model = Mapper.Map<EditUserCourseModel>(course);
 
-            return View("EditUserCourse", model);
+            return View(WebConstants.EditUserCourseView, model);
         }
 
         [HttpPost, ValidateAntiForgeryToken]
@@ -102,7 +103,7 @@
 
             this.coursesService.EditCourseById(model.Id, model.CourseName, model.CoursePoints, username);
 
-            return RedirectToAction("EditCourses");
+            return RedirectToAction(WebConstants.EditCoursesAction);
         }
     }
 }
