@@ -1,0 +1,6 @@
+E:\NaxexRepo\CoursesRegistrationSystem\Courses.Web.Tests\bin\Debug\Courses.Web.Tests.dll
+E:\NaxexRepo\CoursesRegistrationSystem\Courses.Web.Tests\bin\Debug\Courses.Web.Tests.pdb
+E:\NaxexRepo\CoursesRegistrationSystem\Courses.Web.Tests\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+E:\NaxexRepo\CoursesRegistrationSystem\Courses.Web.Tests\obj\Debug\Courses.Web.Tests.csprojResolveAssemblyReference.cache
+E:\NaxexRepo\CoursesRegistrationSystem\Courses.Web.Tests\obj\Debug\Courses.Web.Tests.dll
+E:\NaxexRepo\CoursesRegistrationSystem\Courses.Web.Tests\obj\Debug\Courses.Web.Tests.pdb

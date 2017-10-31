@@ -1,0 +1,4 @@
+E:\NaxexRepo\CoursesRegistrationSystem\Exceptions\bin\Debug\Exceptions.dll
+E:\NaxexRepo\CoursesRegistrationSystem\Exceptions\bin\Debug\Exceptions.pdb
+E:\NaxexRepo\CoursesRegistrationSystem\Exceptions\obj\Debug\Exceptions.dll
+E:\NaxexRepo\CoursesRegistrationSystem\Exceptions\obj\Debug\Exceptions.pdb

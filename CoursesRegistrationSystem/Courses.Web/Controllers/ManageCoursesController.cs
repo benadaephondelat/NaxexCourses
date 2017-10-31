@@ -50,19 +50,13 @@
         [HttpGet]
         public ActionResult EditCourses()
         {
-            return View(WebConstants.EditCoursesView);
-        }
-
-        [HttpGet]
-        public ActionResult CoursesGrid()
-        {
             string username = base.CurrentUserName();
 
             IEnumerable<Course> userCourses = this.coursesService.GetUserCreatedCourses(username);
 
             IEnumerable<EditCourseGridViewModel> result = Mapper.Map<IEnumerable<EditCourseGridViewModel>>(userCourses);
 
-            return PartialView(WebConstants.CoursesGridPartialView, result);
+            return View(WebConstants.EditCoursesView, result);
         }
     }
 }

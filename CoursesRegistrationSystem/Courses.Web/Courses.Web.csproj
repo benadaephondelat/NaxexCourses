@@ -311,7 +311,6 @@
     <Content Include="Views\ManageCourses\Index.cshtml" />
     <Content Include="Views\ManageCourses\CreateNewCourse.cshtml" />
     <Content Include="Views\ManageCourses\EditCourses.cshtml" />
-    <Content Include="Views\ManageCourses\_EditCoursesGrid.cshtml" />
     <Content Include="Views\Shared\MvcGrid\_Pager.cshtml" />
     <Content Include="Views\Shared\MvcGrid\_Grid.cshtml" />
     <Content Include="Views\Shared\MvcGrid\_AjaxGrid.cshtml" />

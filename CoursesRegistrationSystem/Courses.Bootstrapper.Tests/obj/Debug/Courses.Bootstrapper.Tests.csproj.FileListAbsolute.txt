@@ -1,0 +1,5 @@
+E:\NaxexRepo\CoursesRegistrationSystem\Courses.Bootstrapper.Tests\bin\Debug\Courses.Bootstrapper.Tests.dll
+E:\NaxexRepo\CoursesRegistrationSystem\Courses.Bootstrapper.Tests\bin\Debug\Courses.Bootstrapper.Tests.pdb
+E:\NaxexRepo\CoursesRegistrationSystem\Courses.Bootstrapper.Tests\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+E:\NaxexRepo\CoursesRegistrationSystem\Courses.Bootstrapper.Tests\obj\Debug\Courses.Bootstrapper.Tests.dll
+E:\NaxexRepo\CoursesRegistrationSystem\Courses.Bootstrapper.Tests\obj\Debug\Courses.Bootstrapper.Tests.pdb

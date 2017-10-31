@@ -1,0 +1,4 @@
+E:\NaxexRepo\CoursesRegistrationSystem\Constants\bin\Debug\Constants.dll
+E:\NaxexRepo\CoursesRegistrationSystem\Constants\bin\Debug\Constants.pdb
+E:\NaxexRepo\CoursesRegistrationSystem\Constants\obj\Debug\Constants.dll
+E:\NaxexRepo\CoursesRegistrationSystem\Constants\obj\Debug\Constants.pdb
