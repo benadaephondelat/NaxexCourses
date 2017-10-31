@@ -224,6 +224,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ListCoursesController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ManageCoursesController.cs" />
     <Compile Include="FrameworkExtentions\AntiForgeryTokenHelper.cs" />
@@ -241,6 +242,8 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\ListCourses\CourseListViewModel.cs" />
+    <Compile Include="Models\ListCourses\CoursesListViewModel.cs" />
     <Compile Include="Models\ManageCourses\CreateNewCourseModel.cs" />
     <Compile Include="Models\ManageCourses\EditCourseGridViewModel.cs" />
     <Compile Include="Models\ManageCourses\EditUserCourseModel.cs" />
@@ -320,6 +323,7 @@
     <Content Include="Views\Shared\MvcGrid\_Grid.cshtml" />
     <Content Include="Views\Shared\MvcGrid\_AjaxGrid.cshtml" />
     <Content Include="Views\ManageCourses\EditUserCourse.cshtml" />
+    <Content Include="Views\ListCourses\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

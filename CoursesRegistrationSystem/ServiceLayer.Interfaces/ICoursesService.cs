@@ -57,5 +57,32 @@
         /// <exception cref="UserNotAuthorizedException"></exception>
         /// <exception cref="CourseNotFoundException"></exception>
         void EditCourseById(int courseId, string courseName, double coursePoints, string username);
+
+        /// <summary>
+        /// Returns all courses to which the user has not been registered or throws an exception
+        /// </summary>
+        /// <param name="username">username of the current user</param>
+        /// <exception cref="UserNotFoundException"></exception>
+        /// <returns>IEnumerable<Course></Course></returns>
+        IEnumerable<Course> GetAllAvailableCourses(string username);
+
+        /// <summary>
+        /// Returns all courses to which the user has been registered or throws an exception
+        /// </summary>
+        /// <param name="username">username of the current user</param>
+        /// <exception cref="UserNotFoundException"></exception>
+        /// <returns>IEnumerable<Course></Course></returns>
+        IEnumerable<Course> GetAllRegisteredCourses(string username);
+
+        /// <summary>
+        /// Registers a user to a given course or throws an exception
+        /// </summary>
+        /// <param name="courseId">id of the course to register to</param>
+        /// <param name="username">username of the current user</param>
+        /// <exception cref="UserNotFoundException"></exception>
+        /// <exception cref="CourseNotFoundException"></exception>
+        /// <exception cref="AlreadyRegisteredToCourseException"></exception>
+        /// <exception cref="InsufficientCoursePointsException"></exception>
+        void RegisterToCourse(int courseId, string username);
     }
 }

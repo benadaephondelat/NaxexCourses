@@ -1,0 +1,82 @@
+﻿@model Courses.Web.Models.ListCourses.CoursesListViewModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@Styles.Render("~/Content/css")
+
+<h2>Index</h2>
+
+<div id="courses-container">
+
+    <div id="available-courses-container">
+
+        <h2>Available Courses</h2>
+
+        @if (Model.AvailableCourses.Any())
+        {
+            <ul class="list-group">
+                @foreach (var availableCourse in Model.AvailableCourses)
+                {
+                    <li class="list-group-item">@availableCourse.CourseName</li>
+                    <li class="list-group-item">@availableCourse.CoursePoints</li>
+                    <li>
+                        @using (Ajax.BeginForm("RegisterToCourse", "ListCourses", new { @courseId = availableCourse.Id }, new AjaxOptions()
+                        {
+                            InsertionMode = InsertionMode.Replace,
+                            UpdateTargetId = "courses-container"
+                        }))
+                        {
+                            @Html.AntiForgeryToken()
+
+                            <div class="form-group">
+                                <input type="submit" value="Register" class="btn btn-primary btn-lg text-center" />
+                            </div>
+                        }
+                    </li>
+                }
+            </ul>
+        }
+        else
+        {
+            <h2>Currently there are not available courses, you can create one if you want to</h2>
+            @Html.ActionLink("Create Course", "CreateNewCourse", "ManageCourses")
+        }
+    </div>
+
+    <div id="registered-courses-container">
+
+        <h2>Registered Courses</h2>
+
+        @if (Model.RegisteredCourses.Any())
+        {
+            <ul class="list-group">
+                @foreach (var registeredCourse in Model.RegisteredCourses)
+                {
+                    <li class="list-group-item">@registeredCourse.CourseName</li>
+                    <li class="list-group-item">@registeredCourse.CoursePoints</li>
+                    <li>
+                        @using (Ajax.BeginForm("UnregisterFromCourse", "ListCourses", new { @courseId = registeredCourse.Id }, new AjaxOptions()
+                        {
+                            InsertionMode = InsertionMode.Replace,
+                            UpdateTargetId = "courses-container"
+                        }))
+                        {
+                            @Html.AntiForgeryToken()
+
+                            <div class="form-group">
+                                <input type="submit" value="Unregister" class="btn btn-primary btn-lg text-center" />
+                            </div>
+                        }
+                    </li>
+                }
+            </ul>
+        }
+        else
+        {
+            <h2>You are not registered to any courses yet.</h2>
+        }
+    </div>
+
+</div>

@@ -19,9 +19,6 @@
         [Required]
         public double CurrentStudentPoints { get; set; }
 
-        [Required]
-        public double StudentPointsLimit { get; set; }
-        
         public virtual ICollection<Course> Courses
         {
             get

@@ -99,6 +99,37 @@
             this.data.SaveChanges();
         }
 
+        public IEnumerable<Course> GetAllAvailableCourses(string username)
+        {
+            var user = this.GetUserByUsername(username);
+
+            if (user == null)
+            {
+                throw new UserNotFoundException();
+            }
+
+            var courses = this.data.Courses
+                                   .All()
+                                   .Where(c => c.RegisteredStudents.Any(s => s.Id != user.Id));
+                                        
+            return courses.AsEnumerable();
+        }
+
+        public IEnumerable<Course> GetAllRegisteredCourses(string username)
+        {
+            var user = this.GetUserByUsername(username);
+
+            if (user == null)
+            {
+                throw new UserNotFoundException();
+            }
+
+            var courses = this.data.Courses.All()
+                                           .Where(c => c.RegisteredStudents.Any(s => s.Id == user.Id));
+                                   
+            return courses.AsEnumerable();
+        }
+
         public Course GetCourseById(int courseId, string username)
         {
             var course = this.data.Courses.All().FirstOrDefault(c => c.Id == courseId);
@@ -135,6 +166,43 @@
             var courses = this.data.Courses.All().Where(c => c.CourseCreatorId == currentUser.Id).AsEnumerable();
 
             return courses;
+        }
+
+        public void RegisterToCourse(int courseId, string username)
+        {
+            var course = this.data.Courses.All().FirstOrDefault(c => c.Id == courseId);
+
+            if (course == null)
+            {
+                throw new CourseNotFoundException();
+            }
+
+            var currentUser = this.GetUserByUsername(username);
+
+            if (currentUser == null)
+            {
+                throw new UserNotFoundException();
+            }
+
+            bool isUserAlreadyRegistered = course.RegisteredStudents.Any(s => s.Id == currentUser.Id);
+
+            if (isUserAlreadyRegistered)
+            {
+                throw new AlreadyRegisteredToCourseException();
+            }
+
+            if (currentUser.CurrentStudentPoints < course.CoursePoints)
+            {
+                throw new InsufficientCoursePointsException();
+            }
+
+            course.RegisteredStudents.Add(currentUser);
+            this.data.Courses.Update(course);
+
+            currentUser.CurrentStudentPoints -= course.CoursePoints;
+            this.data.Users.Update(currentUser);
+
+            this.data.SaveChanges();
         }
 
         private ApplicationUser GetUserByUsername(string username)
