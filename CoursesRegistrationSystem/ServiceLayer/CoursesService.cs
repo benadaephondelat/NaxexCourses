@@ -71,6 +71,58 @@
             this.data.SaveChanges();
         }
 
+        public void EditCourseById(int courseId, string courseName, double coursePoints, string username)
+        {
+            var course = this.data.Courses.All().FirstOrDefault(c => c.Id == courseId);
+
+            if (course == null)
+            {
+                throw new CourseNotFoundException();
+            }
+
+            var user = this.GetUserByUsername(username);
+
+            if (user == null)
+            {
+                throw new UserNotFoundException();
+            }
+
+            if (course.CourseCreatorId != user.Id)
+            {
+                throw new UserNotAuthorizedException();
+            }
+
+            course.CourseName = courseName;
+            course.CoursePoints = coursePoints;
+
+            this.data.Courses.Update(course);
+            this.data.SaveChanges();
+        }
+
+        public Course GetCourseById(int courseId, string username)
+        {
+            var course = this.data.Courses.All().FirstOrDefault(c => c.Id == courseId);
+
+            if (course == null)
+            {
+                throw new CourseNotFoundException();
+            }
+
+            var user = this.GetUserByUsername(username);
+
+            if (user == null)
+            {
+                throw new UserNotFoundException();
+            }
+
+            if (course.CourseCreatorId != user.Id)
+            {
+                throw new UserNotAuthorizedException();
+            }
+
+            return course;
+        }
+
         public IEnumerable<Course> GetUserCreatedCourses(string username)
         {
             var currentUser = this.GetUserByUsername(username);

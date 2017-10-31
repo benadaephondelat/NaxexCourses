@@ -28,11 +28,34 @@
         /// <summary>
         /// Deletes a course by a given id or throws an exception
         /// </summary>
-        /// <param name="id">id of the course to delete</param>
+        /// <param name="courseId">id of the course to delete</param>
         /// <param name="username">the username of the current user</param>
         /// <exception cref="UserNotFoundException"></exception>
         /// <exception cref="UserNotAuthorizedException"></exception>
         /// <exception cref="CourseNotFoundException"></exception>
-        void DeleteCourseById(int id, string username);
+        void DeleteCourseById(int courseId, string username);
+
+        /// <summary>
+        /// Returns a course by a given id or throws an exception
+        /// </summary>
+        /// <param name="courseId">id of the course</param>
+        /// <param name="username">username of the current user</param>
+        /// <exception cref="UserNotFoundException"></exception>
+        /// <exception cref="UserNotAuthorizedException"></exception>
+        /// <exception cref="CourseNotFoundException"></exception>
+        /// <returns>Course</returns>
+        Course GetCourseById(int courseId, string username);
+
+        /// <summary>
+        /// Edits a course by a given Id and properties or throws an exception
+        /// </summary>
+        /// <param name="courseId">id of the course</param>
+        /// <param name="courseName">name of the course</param>
+        /// <param name="coursePoints">points of the course</param>
+        /// <param name="username">username of the current user</param>
+        /// <exception cref="UserNotFoundException"></exception>
+        /// <exception cref="UserNotAuthorizedException"></exception>
+        /// <exception cref="CourseNotFoundException"></exception>
+        void EditCourseById(int courseId, string courseName, double coursePoints, string username);
     }
 }

@@ -35,18 +35,24 @@ var manageCoursesGridModule = (function (jQuery) {
             var clickedElement = event.target.id;
 
             if (clickedElement === editCourseButtonId) {
-                var gameId = $(currentGridRow).find('td.course-id').html();
+                var courseId = $(currentGridRow).find('td.course-id').html();
 
                 var data = JSON.stringify({
-                    gameId: gameId
+                    courseId: courseId
                 });
 
-                createPostRequestAjaxCall(antiForgeryToken, data, editCourseAjaxUrl);
+                createPostRequestAjaxCall(antiForgeryToken, data, editCourseAjaxUrl).done(function (response) {
+                    response = JSON.parse(response);
+
+                    if (response.result === 'Redirect') {
+                        window.location = window.location.origin + '/' + response.url;
+                    }
+                });
             } else if (clickedElement === deleteCourseButtonId) {
-                var gameId = $(currentGridRow).find('td.course-id').html();
+                var courseId = $(currentGridRow).find('td.course-id').html();
 
                 var data = JSON.stringify({
-                    gameId: gameId
+                    courseId: courseId
                 });
 
                 createPostRequestAjaxCall(antiForgeryToken, data, deleteCourseAjaxUrl).done(function (result) {

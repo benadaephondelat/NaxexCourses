@@ -60,13 +60,49 @@
         }
 
         [HttpPost, ValidateAntiForgeryTokenAjax]
-        public ActionResult DeleteCourse(int gameId)
+        public ActionResult DeleteCourse(int courseId)
         {
             string username = base.CurrentUserName();
 
-            this.coursesService.DeleteCourseById(gameId, username);
+            this.coursesService.DeleteCourseById(courseId, username);
 
             return Json(true);
+        }
+
+        [HttpPost, ValidateAntiForgeryTokenAjax]
+        public ActionResult EditCourse(int courseId)
+        {
+            var result = new
+            {
+                result = "Redirect",
+                url = Url.Action("EditUserCourse", "ManageCourses",
+                new { @courseId = courseId })
+            };
+
+            return Json(result);
+        }
+
+        [HttpGet]
+        public ActionResult EditUserCourse(int courseId)
+        {
+            string username = base.CurrentUserName();
+
+            Course course = this.coursesService.GetCourseById(courseId, username);
+
+            EditUserCourseModel model = Mapper.Map<EditUserCourseModel>(course);
+
+            return View("EditUserCourse", model);
+        }
+
+        [HttpPost, ValidateAntiForgeryToken]
+        [CheckModelStateFilter]
+        public ActionResult EditUserCourse(EditUserCourseModel model)
+        {
+            string username = base.CurrentUserName();
+
+            this.coursesService.EditCourseById(model.Id, model.CourseName, model.CoursePoints, username);
+
+            return RedirectToAction("EditCourses");
         }
     }
 }
