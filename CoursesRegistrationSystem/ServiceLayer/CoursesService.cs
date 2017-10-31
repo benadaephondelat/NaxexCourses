@@ -43,6 +43,34 @@
             await this.data.SaveChangesAsync();
         }
 
+        public void DeleteCourseById(int id, string username)
+        {
+            var course = this.data.Courses.All().FirstOrDefault(c => c.Id == id);
+
+            if (course == null)
+            {
+                throw new CourseNotFoundException();
+            }
+
+            var user = this.GetUserByUsername(username);
+
+            if (user == null)
+            {
+                throw new UserNotFoundException();
+            }
+
+            if (course.CourseCreatorId != user.Id)
+            {
+                throw new UserNotAuthorizedException();
+            }
+
+            user.Courses.Remove(course);
+
+            this.data.Courses.Delete(course);
+
+            this.data.SaveChanges();
+        }
+
         public IEnumerable<Course> GetUserCreatedCourses(string username)
         {
             var currentUser = this.GetUserByUsername(username);

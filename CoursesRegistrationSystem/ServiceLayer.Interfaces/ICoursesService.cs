@@ -24,5 +24,15 @@
         /// <exception cref="UserNotFoundException"></exception>
         /// <returns>Task<IEnumerable<Course></Course>></returns>
         IEnumerable<Course> GetUserCreatedCourses(string username);
+
+        /// <summary>
+        /// Deletes a course by a given id or throws an exception
+        /// </summary>
+        /// <param name="id">id of the course to delete</param>
+        /// <param name="username">the username of the current user</param>
+        /// <exception cref="UserNotFoundException"></exception>
+        /// <exception cref="UserNotAuthorizedException"></exception>
+        /// <exception cref="CourseNotFoundException"></exception>
+        void DeleteCourseById(int id, string username);
     }
 }

@@ -8,8 +8,8 @@
     using System.Threading.Tasks;
     using FrameworkExtentions;
     using System.Collections.Generic;
-    using global::Models;
     using AutoMapper;
+    using global::Models;
 
     public class ManageCoursesController : BaseController
     {
@@ -57,6 +57,16 @@
             IEnumerable<EditCourseGridViewModel> result = Mapper.Map<IEnumerable<EditCourseGridViewModel>>(userCourses);
 
             return View(WebConstants.EditCoursesView, result);
+        }
+
+        [HttpPost, ValidateAntiForgeryTokenAjax]
+        public ActionResult DeleteCourse(int gameId)
+        {
+            string username = base.CurrentUserName();
+
+            this.coursesService.DeleteCourseById(gameId, username);
+
+            return Json(true);
         }
     }
 }

@@ -235,6 +235,7 @@
     <Compile Include="FrameworkExtentions\Mappings\IMapTo.cs" />
     <Compile Include="FrameworkExtentions\Mappings\TypesMap.cs" />
     <Compile Include="FrameworkExtentions\UserIdentityHelper.cs" />
+    <Compile Include="FrameworkExtentions\ValidateAntiForgeryTokenAjax.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

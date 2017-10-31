@@ -1,5 +1,0 @@
-E:\NaxexRepo\CoursesRegistrationSystem\Courses.DataLayer.Tests\bin\Debug\Courses.DataLayer.Tests.dll
-E:\NaxexRepo\CoursesRegistrationSystem\Courses.DataLayer.Tests\bin\Debug\Courses.DataLayer.Tests.pdb
-E:\NaxexRepo\CoursesRegistrationSystem\Courses.DataLayer.Tests\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
-E:\NaxexRepo\CoursesRegistrationSystem\Courses.DataLayer.Tests\obj\Debug\Courses.DataLayer.Tests.dll
-E:\NaxexRepo\CoursesRegistrationSystem\Courses.DataLayer.Tests\obj\Debug\Courses.DataLayer.Tests.pdb

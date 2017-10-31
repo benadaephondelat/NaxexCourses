@@ -40,9 +40,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CourseException\CourseNotFoundException.cs" />
     <Compile Include="MainApplicationException.cs" />
     <Compile Include="CourseException\CourseAlreadyExistsException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserExceptions\UserNotAuthorizedException.cs" />
     <Compile Include="UserExceptions\UserNotFoundException.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

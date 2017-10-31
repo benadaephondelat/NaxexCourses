@@ -18,9 +18,9 @@ var manageCoursesGridModule = (function (jQuery) {
 
     /* variables */
     var editCourseButtonId = 'edit-course-button',
-        editCourseAjaxUrl = '/ManageCoursesController/EditCourse',
+        editCourseAjaxUrl = '/ManageCourses/EditCourse',
         deleteCourseButtonId = 'delete-course-button',
-        deleteCourseAjaxUrl = '/ManageCoursesController/DeleteCourse';
+        deleteCourseAjaxUrl = '/ManageCourses/DeleteCourse';
 
     /* DOM objects */
     var antiForgeryToken = $('#anti-forgery-token').attr('value');
@@ -49,7 +49,9 @@ var manageCoursesGridModule = (function (jQuery) {
                     gameId: gameId
                 });
 
-                createPostRequestAjaxCall(antiForgeryToken, data, deleteCourseAjaxUrl);
+                createPostRequestAjaxCall(antiForgeryToken, data, deleteCourseAjaxUrl).done(function (result) {
+                    window.location.reload();
+                });
             }
         });
     };
