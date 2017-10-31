@@ -1,10 +1,12 @@
-﻿@model IEnumerable<Courses.Web.Models.ManageCourses.EditCourseGridViewModel>
+﻿@using Courses.Web.FrameworkExtentions
+
+@model IEnumerable<Courses.Web.Models.ManageCourses.EditCourseGridViewModel>
 
 @{
     ViewBag.Title = "EditCourses";
 }
 
-<link href="~/Content/MvcGrid/mvc-grid.css" rel="stylesheet">
+@Styles.Render("~/Content/mvc-grid-css")
 
 <h2>EditCourses</h2>
 
@@ -12,7 +14,7 @@
     .Grid(Model)
     .Build(columns =>
     {
-        columns.Add(model => model.Id).Titled("Game ID").Css("hidden game-id");
+        columns.Add(model => model.Id).Titled("Game ID").Css("hidden course-id");
         columns.Add(model => model.CourseName).Titled("Name").InitialSort(GridSortOrder.Desc);
         columns.Add(model => model.CoursePoints).Titled("Points");
         columns.Add(model => model.RegisteredStudents).Titled("Registered Users count");
@@ -27,9 +29,8 @@
     .Empty("No data found")
 )
 
-<script src="~/Scripts/jquery-2.1.4.js"></script>
-<script src="~/Scripts/MvcGrid/mvc-grid.js"></script>
+<input type="hidden" id="anti-forgery-token" value="@AntiForgeryTokenHelper.GetAntiForgeryToken()" />
 
-<script>
-    $('.mvc-grid').mvcgrid();
-</script>
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/mvc-grid")
+@Scripts.Render("~/bundles/manageCoursesGridModule")

@@ -36,6 +36,9 @@ namespace Courses.Web
             bundles.Add(new ScriptBundle("~/bundles/mvc-grid")
                    .Include("~/Scripts/MvcGrid/mvc-grid.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/manageCoursesGridModule")
+                   .Include("~/Scripts/Custom/manageCoursesGridModule.js"));
+
             #if DEBUG
                 BundleTable.EnableOptimizations = false;
             #else
