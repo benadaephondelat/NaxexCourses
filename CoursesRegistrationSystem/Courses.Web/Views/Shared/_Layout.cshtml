@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using Courses.Web.FrameworkExtentions
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -24,6 +26,12 @@
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+
+                    @if (UserIdentityHelper.UserIsLoggedIn(this.User))
+                    {
+                        <li>@Html.ActionLink("Manage Courses", "Index", "ManageCourses")</li>
+                        <li>@Html.ActionLink("List of Courses", "Index", "ListCourses")</li>
+                    }
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>

@@ -214,12 +214,17 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ManageCoursesController.cs" />
+    <Compile Include="FrameworkExtentions\CheckModelState.cs" />
+    <Compile Include="FrameworkExtentions\UserIdentityHelper.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\ManageCourses\CreateNewCourseModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -282,6 +287,8 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\ManageCourses\Index.cshtml" />
+    <Content Include="Views\ManageCourses\CreateNewCourse.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -298,6 +305,10 @@
     <ProjectReference Include="..\Bootstrapper\Bootstrapper.csproj">
       <Project>{011EA49A-EF56-4B92-A7F0-BDDFAFE87F59}</Project>
       <Name>Bootstrapper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Constants\Constants.csproj">
+      <Project>{222F56EF-19F9-40ED-8B6B-1C68F98FEEB3}</Project>
+      <Name>Constants</Name>
     </ProjectReference>
     <ProjectReference Include="..\Models\Models.csproj">
       <Project>{B1A87A1B-83DA-4105-B2BF-615BD9151E1E}</Project>

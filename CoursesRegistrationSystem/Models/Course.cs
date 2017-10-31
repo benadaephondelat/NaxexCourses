@@ -2,6 +2,7 @@
 {
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
 
     public class Course
     {
@@ -22,6 +23,11 @@
         [Required]
         [Range(0, 10)]
         public double CoursePoints { get; set; }
+
+        public string CourseCreatorId { get; set; }
+
+        [ForeignKey("CourseCreatorId")]
+        public virtual ApplicationUser CourseCreator { get; set; }
 
         public virtual ICollection<ApplicationUser> RegisteredStudents
         {

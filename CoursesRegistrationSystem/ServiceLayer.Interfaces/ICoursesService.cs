@@ -2,14 +2,18 @@
 {
     using Models;
     using System.Collections.Generic;
+    using System.Threading.Tasks;
 
     public interface ICoursesService
     {
         /// <summary>
-        /// Returns a list of all courses to which a user is registered
+        /// Creates a new Course or throws an exception
         /// </summary>
-        /// <param name="username">Username of the user</param>
-        /// <returns>IEnumerable<Course></Course></returns>
-        IEnumerable<Course> GetAllRegisteredCoursesByUsername(string username);
+        /// <param name="courseName"></param>
+        /// <param name="coursePoints"></param>
+        /// <param name="username"></param>
+        /// <exception cref="CourseAlreadyExistsException"></exception>
+        /// <returns>Task</returns>
+        Task CreateNewCourse(string courseName, double coursePoints, string username);
     }
 }
