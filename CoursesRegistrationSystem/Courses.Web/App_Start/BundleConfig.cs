@@ -8,8 +8,11 @@ namespace Courses.Web
         // For more information on bundling, visit http://go.microsoft.com/fwlink/?LinkId=301862
         public static void RegisterBundles(BundleCollection bundles)
         {
-            bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-{version}.js"));
+            bundles.Add(new ScriptBundle("~/bundles/jquery")
+                   .Include("~/Scripts/jquery-2.1.4.js")
+                   .Include("~/Scripts/jquery.validate.js")
+                   .Include("~/Scripts/jquery.unobtrusive-ajax.js")
+                   .Include("~/Scripts/jquery.validate.unobtrusive.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
@@ -26,6 +29,18 @@ namespace Courses.Web
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
+
+            bundles.Add(new StyleBundle("~/Content/mvc-grid-css")
+                   .Include("~/Content/MvcGrid/mvc-grid.css"));
+
+            bundles.Add(new ScriptBundle("~/bundles/mvc-grid")
+                   .Include("~/Scripts/MvcGrid/mvc-grid.js"));
+
+            #if DEBUG
+                BundleTable.EnableOptimizations = false;
+            #else
+                BundleTable.EnableOptimizations = true;
+            #endif
         }
     }
 }

@@ -9,6 +9,7 @@
     using DataLayer.Interfaces;
     using Exceptions.CourseException;
     using Exceptions.UserExceptions;
+    using System.Collections.Generic;
 
     public class CoursesService : ICoursesService
     {
@@ -40,6 +41,20 @@
             this.data.Courses.Add(newCourse);
 
             await this.data.SaveChangesAsync();
+        }
+
+        public IEnumerable<Course> GetUserCreatedCourses(string username)
+        {
+            var currentUser = this.GetUserByUsername(username);
+
+            if (currentUser == null)
+            {
+                throw new UserNotFoundException();
+            }
+
+            var courses = this.data.Courses.All().Where(c => c.CourseCreatorId == currentUser.Id).AsEnumerable();
+
+            return courses;
         }
 
         private ApplicationUser GetUserByUsername(string username)

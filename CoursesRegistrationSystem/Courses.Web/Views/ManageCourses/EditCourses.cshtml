@@ -1,0 +1,15 @@
+﻿@{
+    ViewBag.Title = "EditCourses";
+}
+
+<link href="~/Content/MvcGrid/mvc-grid.css" rel="stylesheet">
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script src="~/Scripts/MvcGrid/mvc-grid.js"></script>
+
+<h2>EditCourses</h2>
+
+@Html.AjaxGrid(Url.Action("CoursesGrid", "ManageCourses"))
+
+<script>
+    $('.mvc-grid').mvcgrid();
+</script>

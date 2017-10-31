@@ -7,6 +7,9 @@
     using Models.ManageCourses;
     using System.Threading.Tasks;
     using FrameworkExtentions;
+    using System.Collections.Generic;
+    using global::Models;
+    using AutoMapper;
 
     public class ManageCoursesController : BaseController
     {
@@ -42,6 +45,24 @@
             await this.coursesService.CreateNewCourse(model.CourseName, model.CoursePoints, base.CurrentUserName());
 
             return RedirectToAction(WebConstants.IndexView);
+        }
+
+        [HttpGet]
+        public ActionResult EditCourses()
+        {
+            return View(WebConstants.EditCoursesView);
+        }
+
+        [HttpGet]
+        public ActionResult CoursesGrid()
+        {
+            string username = base.CurrentUserName();
+
+            IEnumerable<Course> userCourses = this.coursesService.GetUserCreatedCourses(username);
+
+            IEnumerable<EditCourseGridViewModel> result = Mapper.Map<IEnumerable<EditCourseGridViewModel>>(userCourses);
+
+            return PartialView(WebConstants.CoursesGridPartialView, result);
         }
     }
 }
