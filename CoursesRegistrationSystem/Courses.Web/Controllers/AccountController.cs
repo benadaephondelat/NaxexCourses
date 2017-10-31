@@ -10,6 +10,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Courses.Web.Models;
 using Models;
+using Bootstrapper.IdentityConfiguration;
 
 namespace Courses.Web.Controllers
 {

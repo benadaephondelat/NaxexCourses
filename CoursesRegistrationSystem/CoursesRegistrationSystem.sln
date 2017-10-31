@@ -35,6 +35,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Courses.ServiceLayer.Tests"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bootstrapper", "Bootstrapper\Bootstrapper.csproj", "{011EA49A-EF56-4B92-A7F0-BDDFAFE87F59}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Courses.Bootstrapper.Tests", "Courses.Bootstrapper.Tests\Courses.Bootstrapper.Tests.csproj", "{5685D886-06D0-4BCD-9A2B-EE9AD3711483}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -81,6 +83,10 @@ Global
 		{011EA49A-EF56-4B92-A7F0-BDDFAFE87F59}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{011EA49A-EF56-4B92-A7F0-BDDFAFE87F59}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{011EA49A-EF56-4B92-A7F0-BDDFAFE87F59}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5685D886-06D0-4BCD-9A2B-EE9AD3711483}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5685D886-06D0-4BCD-9A2B-EE9AD3711483}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5685D886-06D0-4BCD-9A2B-EE9AD3711483}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5685D886-06D0-4BCD-9A2B-EE9AD3711483}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -96,5 +102,6 @@ Global
 		{D26443CE-E472-4CDC-A5BD-605C9D95768C} = {D48BC796-3932-46B3-AD6E-9077570EEAD1}
 		{48D5D809-1F85-412A-8EBA-33495C4BA7D5} = {E3F66CB8-7813-491E-AFF8-F54849759AB6}
 		{011EA49A-EF56-4B92-A7F0-BDDFAFE87F59} = {5CE466A2-FF43-45EE-84F8-9C6135279630}
+		{5685D886-06D0-4BCD-9A2B-EE9AD3711483} = {E3F66CB8-7813-491E-AFF8-F54849759AB6}
 	EndGlobalSection
 EndGlobal

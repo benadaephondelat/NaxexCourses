@@ -1,0 +1,16 @@
+E:\NaxexRepo\CoursesRegistrationSystem\DataLayer.Interfaces\bin\Debug\DataLayer.Interfaces.dll.config
+E:\NaxexRepo\CoursesRegistrationSystem\DataLayer.Interfaces\bin\Debug\DataLayer.Interfaces.dll
+E:\NaxexRepo\CoursesRegistrationSystem\DataLayer.Interfaces\bin\Debug\DataLayer.Interfaces.pdb
+E:\NaxexRepo\CoursesRegistrationSystem\DataLayer.Interfaces\bin\Debug\EntityFramework.dll
+E:\NaxexRepo\CoursesRegistrationSystem\DataLayer.Interfaces\bin\Debug\EntityFramework.SqlServer.dll
+E:\NaxexRepo\CoursesRegistrationSystem\DataLayer.Interfaces\bin\Debug\Microsoft.AspNet.Identity.Core.dll
+E:\NaxexRepo\CoursesRegistrationSystem\DataLayer.Interfaces\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.dll
+E:\NaxexRepo\CoursesRegistrationSystem\DataLayer.Interfaces\bin\Debug\Models.dll
+E:\NaxexRepo\CoursesRegistrationSystem\DataLayer.Interfaces\bin\Debug\Models.pdb
+E:\NaxexRepo\CoursesRegistrationSystem\DataLayer.Interfaces\bin\Debug\EntityFramework.xml
+E:\NaxexRepo\CoursesRegistrationSystem\DataLayer.Interfaces\bin\Debug\EntityFramework.SqlServer.xml
+E:\NaxexRepo\CoursesRegistrationSystem\DataLayer.Interfaces\bin\Debug\Microsoft.AspNet.Identity.Core.xml
+E:\NaxexRepo\CoursesRegistrationSystem\DataLayer.Interfaces\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.xml
+E:\NaxexRepo\CoursesRegistrationSystem\DataLayer.Interfaces\obj\Debug\DataLayer.Interfaces.csprojResolveAssemblyReference.cache
+E:\NaxexRepo\CoursesRegistrationSystem\DataLayer.Interfaces\obj\Debug\DataLayer.Interfaces.dll
+E:\NaxexRepo\CoursesRegistrationSystem\DataLayer.Interfaces\obj\Debug\DataLayer.Interfaces.pdb
