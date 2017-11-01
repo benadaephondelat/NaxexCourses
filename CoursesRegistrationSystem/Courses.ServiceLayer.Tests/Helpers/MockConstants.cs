@@ -38,6 +38,15 @@
         public static double UserWithSingleCourseMaxPoints = 100D;
 
 
+        public static string UserWithTwoCoursesId = "user-two-courses-id";
+
+        public static string UserWithTwoCoursesUsername = "user-with-two-courses@yahoo.com";
+
+        public static double UserWithTwoCoursesCurrentPoints = 30D;
+
+        public static double UserWithTwoCoursesMaxPoints = 100D;
+
+
         public static int EmptyCourseId = 1;
 
         public static string EmptyCourseName = "EmptyCourse";
@@ -55,6 +64,13 @@
         public static string CourseWithSingleUserName = "course with one user";
 
         public static double CourseWithSingleUserPoints = 2D;
+
+
+        public static int CourseWithTwoUsersId = 4;
+
+        public static string CourseWithTwoUsersName = "course with two users";
+
+        public static double CourseWithTwoUsersPoints = 7D;
 
 
         public static double MaximumAllowedCoursePoints = 10D;

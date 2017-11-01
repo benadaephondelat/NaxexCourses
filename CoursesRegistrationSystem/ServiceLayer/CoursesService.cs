@@ -2,14 +2,14 @@
 {
     using System;
     using System.Linq;
-    using System.Threading.Tasks;
+    using System.Collections.Generic;
 
     using Models;
     using Interfaces;
+    using LinqExtentions;
     using DataLayer.Interfaces;
     using Exceptions.CourseException;
     using Exceptions.UserExceptions;
-    using System.Collections.Generic;
 
     public class CoursesService : ICoursesService
     {
@@ -22,12 +22,7 @@
 
         public Course CreateNewCourse(string courseName, double coursePoints, string username)
         {
-            var currentUser = this.GetUserByUsername(username);
-
-            if (currentUser == null)
-            {
-                throw new UserNotFoundException();
-            }
+            ApplicationUser currentUser = this.GetUserByUsername(username);
 
             this.IfCourseNameExistsThrowException(courseName);
 
@@ -45,51 +40,23 @@
 
         public void DeleteCourseById(int id, string username)
         {
-            var user = this.GetUserByUsername(username);
+            ApplicationUser user = this.GetUserByUsername(username);
 
-            if (user == null)
-            {
-                throw new UserNotFoundException();
-            }
+            Course course = this.GetCourseById(id);
 
-            var course = this.data.Courses.All().FirstOrDefault(c => c.Id == id);
-
-            if (course == null)
-            {
-                throw new CourseNotFoundException();
-            }
-
-            if (course.CourseCreatorId != user.Id)
-            {
-                throw new UserNotAuthorizedException();
-            }
+            this.IfUserIsNotCreatorOfTheCourseThrowException(user.Id, course.CourseCreatorId);
 
             this.data.Courses.Delete(course);
-
             this.data.SaveChanges();
         }
 
         public Course EditCourseById(int courseId, string courseName, double coursePoints, string username)
         {
-            var course = this.data.Courses.All().FirstOrDefault(c => c.Id == courseId);
+            Course course = this.GetCourseById(courseId);
 
-            if (course == null)
-            {
-                throw new CourseNotFoundException();
-            }
+            ApplicationUser user = this.GetUserByUsername(username);
 
-            var user = this.GetUserByUsername(username);
-
-            if (user == null)
-            {
-                throw new UserNotFoundException();
-            }
-
-            if (course.CourseCreatorId != user.Id)
-            {
-                throw new UserNotAuthorizedException();
-            }
-
+            this.IfUserIsNotCreatorOfTheCourseThrowException(user.Id, course.CourseCreatorId);
             this.IfCourseNameExistsThrowException(courseName);
 
             course.CourseName = courseName;
@@ -103,12 +70,7 @@
 
         public IEnumerable<Course> GetAllAvailableCourses(string username)
         {
-            var user = this.GetUserByUsername(username);
-
-            if (user == null)
-            {
-                throw new UserNotFoundException();
-            }
+            ApplicationUser user = this.GetUserByUsername(username);
 
             var courses = this.data.Courses.All().AsParallel();
                                         
@@ -117,50 +79,27 @@
 
         public IEnumerable<Course> GetAllRegisteredCourses(string username)
         {
-            var user = this.GetUserByUsername(username);
+            ApplicationUser user = this.GetUserByUsername(username);
 
-            if (user == null)
-            {
-                throw new UserNotFoundException();
-            }
-
-            var courses = this.data.Courses.All().Where(c => c.ApplicationUsers.Any(s => s.Id == user.Id));
+            var courses = this.data.Courses.GetAllUserRegisteredCourses(user.Id);
 
             return courses.AsEnumerable();
         }
 
         public Course GetCourseById(int courseId, string username)
         {
-            var course = this.data.Courses.All().FirstOrDefault(c => c.Id == courseId);
+            Course course = this.GetCourseById(courseId);
 
-            if (course == null)
-            {
-                throw new CourseNotFoundException();
-            }
+            ApplicationUser user = this.GetUserByUsername(username);
 
-            var user = this.GetUserByUsername(username);
-
-            if (user == null)
-            {
-                throw new UserNotFoundException();
-            }
-
-            if (course.CourseCreatorId != user.Id)
-            {
-                throw new UserNotAuthorizedException();
-            }
+            this.IfUserIsNotCreatorOfTheCourseThrowException(user.Id, course.CourseCreatorId);
 
             return course;
         }
 
         public IEnumerable<Course> GetUserCreatedCourses(string username)
         {
-            var currentUser = this.GetUserByUsername(username);
-
-            if (currentUser == null)
-            {
-                throw new UserNotFoundException();
-            }
+            ApplicationUser currentUser = this.GetUserByUsername(username);
 
             var courses = this.data.Courses.All().Where(c => c.CourseCreatorId == currentUser.Id).AsEnumerable();
 
@@ -169,31 +108,16 @@
 
         public double GetUserCurrentPoints(string username)
         {
-            var user = this.GetUserByUsername(username);
-
-            if (user == null)
-            {
-                throw new UserNotFoundException();
-            }
+            ApplicationUser user = this.GetUserByUsername(username);
 
             return user.CurrentStudentPoints;
         }
 
         public Course RegisterToCourse(int courseId, string username)
         {
-            var course = this.data.Courses.All().FirstOrDefault(c => c.Id == courseId);
+            Course course = this.GetCourseById(courseId);
 
-            if (course == null)
-            {
-                throw new CourseNotFoundException();
-            }
-
-            var currentUser = this.GetUserByUsername(username);
-
-            if (currentUser == null)
-            {
-                throw new UserNotFoundException();
-            }
+            ApplicationUser currentUser = this.GetUserByUsername(username);
 
             bool isUserAlreadyRegistered = currentUser.Courses.Any(c => c.Id == course.Id);
 
@@ -219,21 +143,11 @@
             return course;
         }
 
-        public void UnregisterFromCourse(int courseId, string username)
+        public Course UnregisterFromCourse(int courseId, string username)
         {
-            var course = this.data.Courses.All().FirstOrDefault(c => c.Id == courseId);
+            Course course = this.GetCourseById(courseId);
 
-            if (course == null)
-            {
-                throw new CourseNotFoundException();
-            }
-
-            var currentUser = this.GetUserByUsername(username);
-
-            if (currentUser == null)
-            {
-                throw new UserNotFoundException();
-            }
+            ApplicationUser currentUser = this.GetUserByUsername(username);
 
             bool isUserRegistered = currentUser.Courses.Any(c => c.Id == course.Id);
 
@@ -251,20 +165,69 @@
             this.data.Courses.Update(course);
 
             currentUser.Courses.Remove(course);
-
             currentUser.CurrentStudentPoints -= course.CoursePoints;
             this.data.Users.Update(currentUser);
 
             this.data.SaveChanges();
+
+            return course;
         }
 
+        /// <summary>
+        /// Returns a user or throws UserNotFoundException if the user is not found
+        /// </summary>
+        /// <param name="username">username</param>
+        /// <exception cref="UserNotFoundException"></exception>
+        /// <returns>ApplicationUser</returns>
         private ApplicationUser GetUserByUsername(string username)
         {
-            var user = this.data.Users.All().FirstOrDefault(u => u.UserName == username);
+            ApplicationUser user = this.data.Users.All().FirstOrDefault(u => u.UserName == username);
+
+            if (user == null)
+            {
+                throw new UserNotFoundException();
+            }
 
             return user;
         }
 
+        /// <summary>
+        /// Returns a Course by a given id or throws CourseNotFoundException
+        /// </summary>
+        /// <param name="id">id of the course</param>
+        /// <exception cref="CourseNotFoundException"></exception>
+        /// <returns>Course</returns>
+        private Course GetCourseById(int id)
+        {
+            Course course = this.data.Courses.All().FirstOrDefault(c => c.Id == id);
+
+            if (course == null)
+            {
+                throw new CourseNotFoundException();
+            }
+
+            return course;
+        }
+
+        /// <summary>
+        /// If both strings are not the same throw exception
+        /// </summary>
+        /// <param name="userId">Id of the user</param>
+        /// <param name="courseCreatorId">Id of the course creator</param>
+        /// <exception cref="UserNotAuthorizedException"></exception>
+        private void IfUserIsNotCreatorOfTheCourseThrowException(string userId, string courseCreatorId)
+        {
+            if (userId != courseCreatorId)
+            {
+                throw new UserNotAuthorizedException();
+            }
+        }
+
+        /// <summary>
+        /// If there is a course with that name in the database throws exception
+        /// </summary>
+        /// <exception cref="CourseAlreadyExistsException"></exception>
+        /// <param name="courseName">name of the course</param>
         private void IfCourseNameExistsThrowException(string courseName)
         {
             bool isDuplicateCourse = this.data.Courses.All().Any(c => c.CourseName.Equals(courseName, StringComparison.OrdinalIgnoreCase));

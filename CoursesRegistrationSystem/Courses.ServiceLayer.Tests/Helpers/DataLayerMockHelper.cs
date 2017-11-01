@@ -63,7 +63,8 @@
             {
                 this.userWithMinPoints,
                 this.userWithMaxPoints,
-                this.userWithSingleCourse
+                this.userWithSingleCourse,
+                this.userWithTwoCourses
             };
 
             return usersList;
@@ -105,6 +106,31 @@
             }
         };
 
+        private ApplicationUser userWithTwoCourses = new ApplicationUser()
+        {
+            Id = MockConstants.UserWithTwoCoursesId,
+            UserName = MockConstants.UserWithTwoCoursesUsername,
+            CurrentStudentPoints = MockConstants.UserWithTwoCoursesCurrentPoints,
+            StudentMaxPoints = MockConstants.UserWithTwoCoursesMaxPoints,
+            Courses = new List<Course>()
+            {
+                new Course()
+                {
+                    Id = MockConstants.CourseWithSingleUserId,
+                    CourseName = MockConstants.CourseWithSingleUserName,
+                    CourseCreatorId = MockConstants.UserWithSingleCourseId,
+                    CoursePoints = MockConstants.CourseWithSingleUserPoints,
+                },
+                new Course()
+                {
+                    Id = MockConstants.CourseWithTwoUsersId,
+                    CourseName = MockConstants.CourseWithTwoUsersName,
+                    CourseCreatorId = MockConstants.UserWithTwoCoursesId,
+                    CoursePoints = MockConstants.CourseWithTwoUsersPoints,
+                }
+            }
+        };
+
         #endregion
 
         /// <summary>
@@ -137,7 +163,8 @@
             {
                 this.emptyCourseWith10Points,
                 this.emptyCourseWith5Points,
-                this.courseWithSingleUser
+                this.courseWithSingleUser,
+                this.courseWithTwoUsers
             };
 
             return coursesList;
@@ -175,6 +202,31 @@
                     UserName = MockConstants.UserWithSingleCourseUsername,
                     CurrentStudentPoints = MockConstants.UserWithSingleCourseCurrentPoints,
                     StudentMaxPoints = MockConstants.UserWithSingleCourseMaxPoints
+                }
+            }
+        };
+
+        private Course courseWithTwoUsers = new Course()
+        {
+            Id = MockConstants.CourseWithTwoUsersId,
+            CourseName = MockConstants.CourseWithTwoUsersName,
+            CourseCreatorId = MockConstants.UserWithTwoCoursesId,
+            CoursePoints = MockConstants.CourseWithTwoUsersPoints,
+            ApplicationUsers = new List<ApplicationUser>()
+            {
+                new ApplicationUser()
+                {
+                    Id = MockConstants.UserWithSingleCourseId,
+                    UserName = MockConstants.UserWithSingleCourseUsername,
+                    CurrentStudentPoints = MockConstants.UserWithSingleCourseCurrentPoints,
+                    StudentMaxPoints = MockConstants.UserWithSingleCourseMaxPoints
+                },
+                new ApplicationUser()
+                {
+                    Id = MockConstants.UserWithTwoCoursesId,
+                    UserName = MockConstants.UserWithTwoCoursesUsername,
+                    CurrentStudentPoints = MockConstants.UserWithTwoCoursesCurrentPoints,
+                    StudentMaxPoints = MockConstants.UserWithTwoCoursesMaxPoints
                 }
             }
         };

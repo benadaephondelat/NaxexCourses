@@ -96,7 +96,7 @@
         /// <exception cref="CourseNotFoundException"></exception>
         /// <exception cref="NotRegisteredToCourseException"></exception>
         /// <exception cref="InsufficientCoursePointsException"></exception>
-        void UnregisterFromCourse(int courseId, string username);
+        Course UnregisterFromCourse(int courseId, string username);
 
         /// <summary>
         /// Returns the current points to a given user or throws an exception

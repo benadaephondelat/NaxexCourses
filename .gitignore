@@ -15,3 +15,12 @@ CoursesRegistrationSystem/ServiceLayer.Interfaces/bin/
 CoursesRegistrationSystem/ServiceLayer.Interfaces/obj/
 CoursesRegistrationSystem/ServiceLayer/bin/
 CoursesRegistrationSystem/ServiceLayer/obj/
+CoursesRegistrationSystem/Bootstrapper/bin/
+CoursesRegistrationSystem/DataLayer/bin/
+CoursesRegistrationSystem/Courses.Web/obj/
+CoursesRegistrationSystem/Courses.DataLayer.Tests/obj/Debug/Courses.DataLayer.Tests.csproj.FileListAbsolute.txt
+CoursesRegistrationSystem/Courses.Bootstrapper.Tests/obj/
+CoursesRegistrationSystem/DataLayer/obj/Debug/
+CoursesRegistrationSystem/Constants/obj/
+CoursesRegistrationSystem/Bootstrapper/obj/Debug/
+CoursesRegistrationSystem/Courses.Web.Tests/obj/
