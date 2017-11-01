@@ -8,6 +8,8 @@
 
         public static int InvalidCourseId = 999;
 
+        public static double FivePointsCourse = 5D;
+
 
         public static string MinPointsUserId = "min-points-user-id";
 
@@ -27,6 +29,15 @@
         public static double MaxPointsUserMaxPoints = 100D;
 
 
+        public static string UserWithSingleCourseId = "user-with-single-course-id";
+
+        public static string UserWithSingleCourseUsername = "user-with-single-course@yahoo.com";
+
+        public static double UserWithSingleCourseCurrentPoints = 0D;
+
+        public static double UserWithSingleCourseMaxPoints = 100D;
+
+
         public static int EmptyCourseId = 1;
 
         public static string EmptyCourseName = "EmptyCourse";
@@ -38,7 +49,12 @@
 
         public static string EmptyCourseWithFivePointsName = "EmptyCourseWithFivePoints";
 
-        public static double FivePointsCourse = 5D;
+
+        public static int CourseWithSingleUserId = 3;
+
+        public static string CourseWithSingleUserName = "course with one user";
+
+        public static double CourseWithSingleUserPoints = 2D;
 
 
         public static double MaximumAllowedCoursePoints = 10D;

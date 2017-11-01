@@ -124,19 +124,8 @@
                 throw new UserNotFoundException();
             }
 
-            var courses = this.data.Courses.All()
-                                           .Where(c => c.ApplicationUsers.Any(s => s.Id == user.Id));
+            var courses = this.data.Courses.All().Where(c => c.ApplicationUsers.Any(s => s.Id == user.Id));
 
-            var allCourses = this.data.Courses.All().ToList();
-
-            //var firstCourse = allCourses[0];
-
-            //var firstCourseRegistered = firstCourse.RegisteredStudents.ToList();
-
-            //var secondCourse = allCourses[1];
-
-            //var secondCourseRegistered = secondCourse.RegisteredStudents.ToList();
-                                   
             return courses.AsEnumerable();
         }
 
@@ -190,7 +179,7 @@
             return user.CurrentStudentPoints;
         }
 
-        public void RegisterToCourse(int courseId, string username)
+        public Course RegisterToCourse(int courseId, string username)
         {
             var course = this.data.Courses.All().FirstOrDefault(c => c.Id == courseId);
 
@@ -226,6 +215,8 @@
             this.data.Users.Update(currentUser);
 
             this.data.SaveChanges();
+
+            return course;
         }
 
         public void UnregisterFromCourse(int courseId, string username)

@@ -84,7 +84,8 @@
         /// <exception cref="CourseNotFoundException"></exception>
         /// <exception cref="AlreadyRegisteredToCourseException"></exception>
         /// <exception cref="MaxedCoursePointsException"></exception>
-        void RegisterToCourse(int courseId, string username);
+        /// <returns>Course</returns> 
+        Course RegisterToCourse(int courseId, string username);
 
         /// <summary>
         /// Unregisters a user to a given course or throws an exception

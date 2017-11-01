@@ -62,7 +62,8 @@
             List<ApplicationUser> usersList = new List<ApplicationUser>()
             {
                 this.userWithMinPoints,
-                this.userWithMaxPoints
+                this.userWithMaxPoints,
+                this.userWithSingleCourse
             };
 
             return usersList;
@@ -84,6 +85,24 @@
             UserName = MockConstants.MaxPointsUserUsername,
             CurrentStudentPoints = MockConstants.MaxPointsUserCurrentPoints,
             StudentMaxPoints = MockConstants.MaxPointsUserMaxPoints
+        };
+
+        private ApplicationUser userWithSingleCourse = new ApplicationUser()
+        {
+            Id = MockConstants.UserWithSingleCourseId,
+            UserName = MockConstants.UserWithSingleCourseUsername,
+            CurrentStudentPoints = MockConstants.UserWithSingleCourseCurrentPoints,
+            StudentMaxPoints = MockConstants.UserWithSingleCourseMaxPoints,
+            Courses = new List<Course>()
+            {
+                new Course()
+                {
+                    Id = MockConstants.CourseWithSingleUserId,
+                    CourseName = MockConstants.CourseWithSingleUserName,
+                    CourseCreatorId = MockConstants.UserWithSingleCourseId,
+                    CoursePoints = MockConstants.CourseWithSingleUserPoints,
+                }
+            }
         };
 
         #endregion
@@ -117,7 +136,8 @@
             List<Course> coursesList = new List<Course>()
             {
                 this.emptyCourseWith10Points,
-                this.emptyCourseWith5Points
+                this.emptyCourseWith5Points,
+                this.courseWithSingleUser
             };
 
             return coursesList;
@@ -139,6 +159,24 @@
             CourseName = MockConstants.EmptyCourseWithFivePointsName,
             CourseCreatorId = MockConstants.MinPointsUserId,
             CoursePoints = MockConstants.FivePointsCourse
+        };
+
+        private Course courseWithSingleUser = new Course()
+        {
+            Id = MockConstants.CourseWithSingleUserId,
+            CourseName = MockConstants.CourseWithSingleUserName,
+            CourseCreatorId = MockConstants.UserWithSingleCourseId,
+            CoursePoints = MockConstants.CourseWithSingleUserPoints,
+            ApplicationUsers = new List<ApplicationUser>()
+            {
+                new ApplicationUser()
+                {
+                    Id = MockConstants.UserWithSingleCourseId,
+                    UserName = MockConstants.UserWithSingleCourseUsername,
+                    CurrentStudentPoints = MockConstants.UserWithSingleCourseCurrentPoints,
+                    StudentMaxPoints = MockConstants.UserWithSingleCourseMaxPoints
+                }
+            }
         };
 
         #endregion
