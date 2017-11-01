@@ -2,3 +2,16 @@ CoursesRegistrationSystem/packages/
 CoursesRegistrationSystem/Courses.Web/App_Data/aspnet-Courses.Web-20171031011829.mdf
 CoursesRegistrationSystem/Courses.Web/App_Data/aspnet-Courses.Web-20171031011829_log.ldf
 CoursesRegistrationSystem/Courses.Web/bin/
+CoursesRegistrationSystem/Courses.ServiceLayer.Tests/bin/
+CoursesRegistrationSystem/Courses.ServiceLayer.Tests/obj/
+*.dll
+CoursesRegistrationSystem/DataLayer.Interfaces/bin/
+CoursesRegistrationSystem/DataLayer.Interfaces/obj/
+*.pdb
+CoursesRegistrationSystem/Exceptions/obj/
+CoursesRegistrationSystem/Models/bin/
+CoursesRegistrationSystem/Models/obj/
+CoursesRegistrationSystem/ServiceLayer.Interfaces/bin/
+CoursesRegistrationSystem/ServiceLayer.Interfaces/obj/
+CoursesRegistrationSystem/ServiceLayer/bin/
+CoursesRegistrationSystem/ServiceLayer/obj/

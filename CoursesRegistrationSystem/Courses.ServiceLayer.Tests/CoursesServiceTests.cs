@@ -286,5 +286,42 @@
 
         #endregion
 
+        #region GetAllRegisteredCourses Tests
+
+        [TestMethod]
+        [ExpectedException(typeof(UserNotFoundException))]
+        public void GetAllRegisteredCourses_Should_Throw_UserNotFoundException_If_No_Such_User_Exists()
+        {
+            this.coursesService.GetAllRegisteredCourses(MockConstants.InvalidUserUsername);
+        }
+
+        [TestMethod]
+        public void GetAllRegisteredCourses_Should_Return_0_Courses()
+        {
+            var result = this.coursesService.GetAllRegisteredCourses(MockConstants.MinPointsUserUsername);
+
+            Assert.AreEqual(0, result.Count());
+        }
+
+        #endregion
+
+        #region GetUserCurrentPoints Tests
+
+        [TestMethod]
+        [ExpectedException(typeof(UserNotFoundException))]
+        public void GetUserCurrentPoints_Should_Throw_UserNotFoundException_If_No_Such_User_Exists()
+        {
+            this.coursesService.GetUserCurrentPoints(MockConstants.InvalidUserUsername);
+        }
+
+        [TestMethod]
+        public void GetUserCurrentPoints_Should_Return_0()
+        {
+            var result = this.coursesService.GetUserCurrentPoints(MockConstants.MinPointsUserUsername);
+
+            Assert.AreEqual(0, result);
+        }
+
+        #endregion
     }
 }
