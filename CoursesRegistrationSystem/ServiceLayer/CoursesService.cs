@@ -45,18 +45,18 @@
 
         public void DeleteCourseById(int id, string username)
         {
-            var course = this.data.Courses.All().FirstOrDefault(c => c.Id == id);
-
-            if (course == null)
-            {
-                throw new CourseNotFoundException();
-            }
-
             var user = this.GetUserByUsername(username);
 
             if (user == null)
             {
                 throw new UserNotFoundException();
+            }
+
+            var course = this.data.Courses.All().FirstOrDefault(c => c.Id == id);
+
+            if (course == null)
+            {
+                throw new CourseNotFoundException();
             }
 
             if (course.CourseCreatorId != user.Id)

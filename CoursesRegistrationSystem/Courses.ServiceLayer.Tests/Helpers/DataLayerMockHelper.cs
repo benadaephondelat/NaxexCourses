@@ -105,11 +105,11 @@
         /// <returns>IGenericRepository Course</returns>
         private IGenericRepository<Course> SetupCoursesRepoMock()
         {
-            Mock<IGenericRepository<Course>> userRepoMock = new Mock<IGenericRepository<Course>>();
+            Mock<IGenericRepository<Course>> courseRepoMock = new Mock<IGenericRepository<Course>>();
 
-            userRepoMock.Setup(prop => prop.All()).Returns(this.Courses.AsQueryable());
+            courseRepoMock.Setup(prop => prop.All()).Returns(this.Courses.AsQueryable());
 
-            return userRepoMock.Object;
+            return courseRepoMock.Object;
         }
 
         private List<Course> GetDefaultCoursesList()

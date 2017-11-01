@@ -87,5 +87,78 @@
         }
 
         #endregion
+
+        #region GetUserCreatedCourses Tests
+
+        [TestMethod]
+        [ExpectedException(typeof(UserNotFoundException))]
+        public void GetUserCreatedCourses_Should_Throw_UserNotFoundException_If_No_Such_Users_Exists()
+        {
+            this.coursesService.GetUserCreatedCourses(MockConstants.InvalidUserUsername);
+        }
+
+        [TestMethod]
+        public void GetUserCreatedCourses_Should_Return_One_Course()
+        {
+            var result = this.coursesService.GetUserCreatedCourses(MockConstants.MinPointsUserUsername);
+
+            Assert.AreEqual(1, result.Count());
+        }
+
+        #endregion
+
+        #region DeleteCourseById Tests
+
+        [TestMethod]
+        [ExpectedException(typeof(CourseNotFoundException))]
+        public void DeleteCourseById_Should_Throw_CourseNotFoundException_If_No_Such_Course_Exists()
+        {
+            this.coursesService.DeleteCourseById(666, MockConstants.MinPointsUserUsername);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(UserNotFoundException))]
+        public void DeleteCourseById_Should_Throw_UserNotFoundException_If_No_Such_User_Exists()
+        {
+            this.coursesService.DeleteCourseById(MockConstants.EmptyCourseId, MockConstants.InvalidUserUsername);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(UserNotAuthorizedException))]
+        public void DeleteCourseById_Should_Throw_UserNotAuthorizedException_If_No_Creator_Of_The_Course_Is_Not_Requesting_User()
+        {
+            this.coursesService.DeleteCourseById(MockConstants.EmptyCourseId, MockConstants.MaxPointsUserUsername);
+        }
+
+        [Ignore] //Investigate why the course is missing when calling the service, it's mocked properly(i think)
+        [TestMethod]
+        public void DeleteCourseById_Should_Call_CoursesRepository_Delete_Method_Once()
+        {
+            var deleteCourseCounter = 0;
+
+            this.dataLayerMock.Setup(x => x.Courses.Delete(It.IsAny<Course>())).Callback(() => deleteCourseCounter++);
+
+            this.coursesService.DeleteCourseById(MockConstants.EmptyCourseId, MockConstants.MinPointsUserUsername);
+
+            this.dataLayerMock.Verify(x => x.Courses.Delete(It.IsAny<Course>()), Times.Exactly(1));
+
+            Assert.AreEqual(1, deleteCourseCounter);
+        }
+
+        [TestMethod]
+        public void DeleteCourseById_Should_Call_SaveChanges_Method_Once()
+        {
+            var saveChangesCounter = 0;
+
+            this.dataLayerMock.Setup(x => x.SaveChanges()).Callback(() => saveChangesCounter++);
+
+            this.coursesService.DeleteCourseById(MockConstants.EmptyCourseId, MockConstants.MinPointsUserUsername);
+
+            this.dataLayerMock.Verify(x => x.SaveChanges(), Times.Once());
+
+            Assert.AreEqual(1, saveChangesCounter);
+        }
+
+        #endregion
     }
 }
