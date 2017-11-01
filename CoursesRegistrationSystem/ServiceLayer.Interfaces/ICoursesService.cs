@@ -2,7 +2,6 @@
 {
     using Models;
     using System.Collections.Generic;
-    using System.Threading.Tasks;
 
     public interface ICoursesService
     {
@@ -14,8 +13,7 @@
         /// <param name="username"></param>
         /// <exception cref="CourseAlreadyExistsException"></exception>
         /// <exception cref="UserNotFoundException"></exception>
-        /// <returns>Task</returns>
-        Task CreateNewCourse(string courseName, double coursePoints, string username);
+        void CreateNewCourse(string courseName, double coursePoints, string username);
 
         /// <summary>
         /// Get all courses created by the user or throws an exception
@@ -56,6 +54,7 @@
         /// <exception cref="UserNotFoundException"></exception>
         /// <exception cref="UserNotAuthorizedException"></exception>
         /// <exception cref="CourseNotFoundException"></exception>
+        /// <exception cref="CourseAlreadyExistsException"></exception>
         void EditCourseById(int courseId, string courseName, double coursePoints, string username);
 
         /// <summary>

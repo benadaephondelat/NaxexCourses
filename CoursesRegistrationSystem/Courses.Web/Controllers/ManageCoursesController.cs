@@ -1,14 +1,15 @@
 ﻿namespace Courses.Web.Controllers
 {
     using System.Web.Mvc;
+    using System.Collections.Generic;
+
+    using global::Models;
+    using Models.ManageCourses;
     using Constants;
     using ServiceLayer.Interfaces;
-    using Models.ManageCourses;
-    using System.Threading.Tasks;
     using FrameworkExtentions;
-    using System.Collections.Generic;
+
     using AutoMapper;
-    using global::Models;
 
     [CheckIfLoggedInFilter, CheckIfUserSessionIsExpired("Account", "Login")]
     public class ManageCoursesController : BaseController
@@ -40,9 +41,9 @@
 
         [HttpPost, ValidateAntiForgeryToken]
         [CheckModelStateFilter]
-        public async Task<ActionResult> CreateNewCourse(CreateNewCourseModel model)
+        public ActionResult CreateNewCourse(CreateNewCourseModel model)
         {
-            await this.coursesService.CreateNewCourse(model.CourseName, model.CoursePoints, base.CurrentUserName());
+            this.coursesService.CreateNewCourse(model.CourseName, model.CoursePoints, base.CurrentUserName());
 
             return RedirectToAction(WebConstants.IndexView);
         }

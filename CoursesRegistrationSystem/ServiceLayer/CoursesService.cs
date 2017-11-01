@@ -20,7 +20,7 @@
             this.data = data;
         }
 
-        public async Task CreateNewCourse(string courseName, double coursePoints, string username)
+        public void CreateNewCourse(string courseName, double coursePoints, string username)
         {
             var currentUser = this.GetUserByUsername(username);
 
@@ -39,7 +39,7 @@
 
             this.data.Courses.Add(newCourse);
 
-            await this.data.SaveChangesAsync();
+            this.data.SaveChangesAsync();
         }
 
         public void DeleteCourseById(int id, string username)
@@ -88,6 +88,8 @@
             {
                 throw new UserNotAuthorizedException();
             }
+
+            //TODO CHECK FOR DUPLICATE COURSE NAME
 
             course.CourseName = courseName;
             course.CoursePoints = coursePoints;
