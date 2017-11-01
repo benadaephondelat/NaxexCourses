@@ -34,6 +34,13 @@
         public static double EmptyCoursePoints = 10D;
 
 
+        public static int EmptyCourseWithFivePointsId = 2;
+
+        public static string EmptyCourseWithFivePointsName = "EmptyCourseWithFivePoints";
+
+        public static double FivePointsCourse = 5D;
+
+
         public static double MaximumAllowedCoursePoints = 10D;
 
         public static string UniqueCourseName = "UniqueCourseName";

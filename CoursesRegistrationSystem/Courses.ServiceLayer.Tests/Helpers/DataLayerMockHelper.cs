@@ -117,6 +117,7 @@
             List<Course> coursesList = new List<Course>()
             {
                 this.emptyCourseWith10Points,
+                this.emptyCourseWith5Points
             };
 
             return coursesList;
@@ -130,6 +131,14 @@
             CourseName = MockConstants.EmptyCourseName,
             CourseCreatorId = MockConstants.MinPointsUserId,
             CoursePoints = MockConstants.EmptyCoursePoints
+        };
+
+        private Course emptyCourseWith5Points = new Course()
+        {
+            Id = MockConstants.EmptyCourseWithFivePointsId,
+            CourseName = MockConstants.EmptyCourseWithFivePointsName,
+            CourseCreatorId = MockConstants.MinPointsUserId,
+            CoursePoints = MockConstants.FivePointsCourse
         };
 
         #endregion

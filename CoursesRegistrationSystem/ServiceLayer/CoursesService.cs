@@ -69,7 +69,7 @@
             this.data.SaveChanges();
         }
 
-        public void EditCourseById(int courseId, string courseName, double coursePoints, string username)
+        public Course EditCourseById(int courseId, string courseName, double coursePoints, string username)
         {
             var course = this.data.Courses.All().FirstOrDefault(c => c.Id == courseId);
 
@@ -90,13 +90,15 @@
                 throw new UserNotAuthorizedException();
             }
 
-            //TODO CHECK FOR DUPLICATE COURSE NAME
+            this.IfCourseNameExistsThrowException(courseName);
 
             course.CourseName = courseName;
             course.CoursePoints = coursePoints;
 
             this.data.Courses.Update(course);
             this.data.SaveChanges();
+
+            return course;
         }
 
         public IEnumerable<Course> GetAllAvailableCourses(string username)

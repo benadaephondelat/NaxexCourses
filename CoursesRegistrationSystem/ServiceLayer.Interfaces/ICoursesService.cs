@@ -56,7 +56,8 @@
         /// <exception cref="UserNotAuthorizedException"></exception>
         /// <exception cref="CourseNotFoundException"></exception>
         /// <exception cref="CourseAlreadyExistsException"></exception>
-        void EditCourseById(int courseId, string courseName, double coursePoints, string username);
+        /// <returns>Course</returns> 
+        Course EditCourseById(int courseId, string courseName, double coursePoints, string username);
 
         /// <summary>
         /// Returns all courses to which the user has not been registered or throws an exception
