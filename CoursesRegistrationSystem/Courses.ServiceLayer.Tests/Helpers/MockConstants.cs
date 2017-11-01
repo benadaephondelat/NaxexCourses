@@ -4,6 +4,8 @@
     {
         public static string InvalidUserId = "no-such-id-in-the-database";
 
+        public static string InvalidUserUsername = "no-such-username-in-the-database";
+
 
         public static string MinPointsUserId = "min-points-user-id";
 
@@ -28,6 +30,7 @@
         public static string EmptyCourseName = "EmptyCourse";
 
         public static double EmptyCoursePoints = 10D;
+
 
         public static double MaximumAllowedCoursePoints = 10D;
 

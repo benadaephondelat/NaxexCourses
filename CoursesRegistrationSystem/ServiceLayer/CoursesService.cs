@@ -20,7 +20,7 @@
             this.data = data;
         }
 
-        public void CreateNewCourse(string courseName, double coursePoints, string username)
+        public Course CreateNewCourse(string courseName, double coursePoints, string username)
         {
             var currentUser = this.GetUserByUsername(username);
 
@@ -38,8 +38,9 @@
             newCourse.CourseCreatorId = currentUser.Id;
 
             this.data.Courses.Add(newCourse);
+            this.data.SaveChanges();
 
-            this.data.SaveChangesAsync();
+            return newCourse;
         }
 
         public void DeleteCourseById(int id, string username)

@@ -13,7 +13,8 @@
         /// <param name="username"></param>
         /// <exception cref="CourseAlreadyExistsException"></exception>
         /// <exception cref="UserNotFoundException"></exception>
-        void CreateNewCourse(string courseName, double coursePoints, string username);
+        /// <returns>Course</returns>
+        Course CreateNewCourse(string courseName, double coursePoints, string username);
 
         /// <summary>
         /// Get all courses created by the user or throws an exception
