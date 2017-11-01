@@ -29,6 +29,10 @@
     .Empty("No data found")
 )
 
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
 <input type="hidden" id="anti-forgery-token" value="@AntiForgeryTokenHelper.GetAntiForgeryToken()" />
 
 @Scripts.Render("~/bundles/mvc-grid")

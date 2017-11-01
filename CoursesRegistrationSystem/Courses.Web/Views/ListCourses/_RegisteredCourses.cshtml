@@ -4,23 +4,21 @@
 {
     <ul class="list-group">
         @foreach (var registeredCourse in Model)
-            {
-            <li class="list-group-item">@registeredCourse.CourseName</li>
-            <li class="list-group-item">@registeredCourse.CoursePoints</li>
-                <li>
-                    @using (Ajax.BeginForm("UnregisterFromCourse", "ListCourses", new { @courseId = registeredCourse.Id }, new AjaxOptions()
-                    {
+        {
+            <li class="list-group-item">
+                @using (Ajax.BeginForm("UnregisterFromCourse", "ListCourses", new { @courseId = registeredCourse.Id }, new AjaxOptions()
+                {
                         InsertionMode = InsertionMode.Replace,
                         UpdateTargetId = "courses-container"
-                    }))
-                    {
-                        @Html.AntiForgeryToken()
+                }))
+                {
+                    @Html.AntiForgeryToken()
 
-                        <div class="form-group">
-                            <input type="submit" value="Unregister" class="btn btn-primary btn-lg text-center" />
-                        </div>
-                    }
-                </li>
+                    @registeredCourse.CourseName
+                    <span class="badge">@registeredCourse.CoursePoints</span>
+                    <input type="submit" value="Unregister" class="popup-button-group text-center" />
+                }
+            </li>
         }
     </ul>
 }

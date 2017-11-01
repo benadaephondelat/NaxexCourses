@@ -38,6 +38,7 @@
         /// </summary>
         private void RegisterRazorViewEngineOnly()
         {
+            //TODO WHY NOT JUST Remove the view engine that we do not need?
             ViewEngines.Engines.Clear();
             ViewEngines.Engines.Add(new RazorViewEngine());
         }

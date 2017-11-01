@@ -1,9 +1,9 @@
 ﻿namespace Courses.Web.FrameworkExtentions
 {
+    using System.Web;
     using System.Web.Mvc;
     using System.Web.Routing;
-
-    //TODO Logout user and then redirect him to the log in page
+    using System.Web.Security;
 
     /// <summary>
     /// If the current user is not authenticated redirect the user
@@ -21,11 +21,23 @@
 
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            if (filterContext.HttpContext.Session["username"] == null)
-            {
-                RouteValueDictionary routeValueDictionary = GetRouteValueDictionary();
+            HttpContext httpContext = HttpContext.Current;
 
-                filterContext.Result = new RedirectToRouteResult(routeValueDictionary);
+            if (httpContext.Request.IsAuthenticated)
+            {
+                if (httpContext != null)
+                {
+                    string sessionCookie = httpContext.Request.Headers["Cookie"];
+
+                    if (string.IsNullOrWhiteSpace(sessionCookie))
+                    {
+                        FormsAuthentication.SignOut();
+
+                        RouteValueDictionary routeValueDictionary = GetRouteValueDictionary();
+
+                        filterContext.Result = new RedirectToRouteResult(routeValueDictionary);
+                    }
+                }
             }
 
             base.OnActionExecuting(filterContext);

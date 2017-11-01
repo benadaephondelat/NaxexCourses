@@ -19,7 +19,6 @@ input, select, textarea {
 #available-courses-container {
     width: 30%;
     float: left;
-    clear: both;
 }
 
 #registered-courses-container {

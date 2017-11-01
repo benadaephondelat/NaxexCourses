@@ -9,12 +9,11 @@
     <ul class="list-group">
         @foreach (var availableCourse in Model)
         {
-            <li class="list-group-item">@availableCourse.CourseName</li>
-            <li class="list-group-item">@availableCourse.CoursePoints</li>
-            <input type="submit"
-                   value="Register"
-                   data-course-id="@availableCourse.Id"
-                   class="btn btn-primary btn-lg text-center register-course-button" />
+            <li class="list-group-item">
+                @availableCourse.CourseName
+                <span class="badge">@availableCourse.CoursePoints</span>
+                <span data-course-id="@availableCourse.Id" class="badge register-course-button">Register</span>
+            </li>
         }
     </ul>
 }
