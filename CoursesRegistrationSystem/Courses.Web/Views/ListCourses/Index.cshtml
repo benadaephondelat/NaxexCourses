@@ -1,10 +1,14 @@
-﻿@{
+﻿@model double
+
+@{
     ViewBag.Title = "Index";
 }
 
 @Styles.Render("~/Content/css")
 
-<h2>Index</h2>
+<h3>
+    Your current points are @Model
+</h3>
 
 <div id="courses-container">
     <h3>Available Courses</h3>

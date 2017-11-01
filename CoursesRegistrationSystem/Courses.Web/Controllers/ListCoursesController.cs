@@ -26,7 +26,11 @@
         [HttpGet]
         public ActionResult Index()
         {
-            return View(WebConstants.IndexView);
+            string username = base.CurrentUserName();
+
+            double currentUserPoints = this.coursesService.GetUserCurrentPoints(username);
+
+            return View(WebConstants.IndexView, currentUserPoints);
         }
 
         [HttpGet]
