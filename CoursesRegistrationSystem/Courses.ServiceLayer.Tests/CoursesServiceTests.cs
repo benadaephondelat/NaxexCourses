@@ -125,7 +125,7 @@
 
         [TestMethod]
         [ExpectedException(typeof(UserNotAuthorizedException))]
-        public void DeleteCourseById_Should_Throw_UserNotAuthorizedException_If_No_Creator_Of_The_Course_Is_Not_Requesting_User()
+        public void DeleteCourseById_Should_Throw_UserNotAuthorizedException_If_The_Creator_Of_The_Course_Is_Not_The_Requesting_User()
         {
             this.coursesService.DeleteCourseById(MockConstants.EmptyCourseId, MockConstants.MaxPointsUserUsername);
         }
@@ -157,6 +157,39 @@
             this.dataLayerMock.Verify(x => x.SaveChanges(), Times.Once());
 
             Assert.AreEqual(1, saveChangesCounter);
+        }
+
+        #endregion
+
+        #region GetCourseById
+
+        [TestMethod]
+        [ExpectedException(typeof(CourseNotFoundException))]
+        public void GetCourseById_Should_Throw_CourseNotFoundException_If_No_Such_Course_Exists()
+        {
+            Course course = this.coursesService.GetCourseById(MockConstants.InvalidCourseId, MockConstants.MinPointsUserUsername);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(UserNotFoundException))]
+        public void GetCourseById_Should_Throw_UserNotFoundException_If_No_Such_User_Exists()
+        {
+            Course course = this.coursesService.GetCourseById(MockConstants.EmptyCourseId, MockConstants.InvalidUserUsername);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(UserNotAuthorizedException))]
+        public void GetCourseById_Should_Throw_UserNotAuthorizedException_If_The_Creator_Of_The_Course_Is_Not_The_Requesting_User()
+        {
+            Course course = this.coursesService.GetCourseById(MockConstants.EmptyCourseId, MockConstants.MaxPointsUserUsername);
+        }
+
+        [TestMethod]
+        public void GetCourseById_Should_Return_Course_When_Data_Is_Valid()
+        {
+            Course course = this.coursesService.GetCourseById(MockConstants.EmptyCourseId, MockConstants.MinPointsUserUsername);
+
+            Assert.IsNotNull(course);
         }
 
         #endregion

@@ -6,6 +6,8 @@
 
         public static string InvalidUserUsername = "no-such-username-in-the-database";
 
+        public static int InvalidCourseId = 999;
+
 
         public static string MinPointsUserId = "min-points-user-id";
 
