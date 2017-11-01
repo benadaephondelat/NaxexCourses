@@ -266,5 +266,25 @@
         }
 
         #endregion
+
+        #region GetAllAvailableCourses Tests
+
+        [TestMethod]
+        [ExpectedException(typeof(UserNotFoundException))]
+        public void GetAllAvailableCourses_Should_Throw_UserNotFoundException_If_No_Such_User_Exists()
+        {
+            this.coursesService.GetAllAvailableCourses(MockConstants.InvalidUserUsername);
+        }
+
+        [TestMethod]
+        public void GetAllAvailableCourses_Should_Return_2_Courses()
+        {
+            var result = this.coursesService.GetAllAvailableCourses(MockConstants.MinPointsUserUsername);
+
+            Assert.AreEqual(2, result.Count());
+        }
+
+        #endregion
+
     }
 }
