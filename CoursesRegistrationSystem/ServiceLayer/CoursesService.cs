@@ -35,7 +35,6 @@
 
             newCourse.CourseName = courseName;
             newCourse.CoursePoints = coursePoints;
-            newCourse.CourseCreator = currentUser;
             newCourse.CourseCreatorId = currentUser.Id;
 
             this.data.Courses.Add(newCourse);
@@ -63,8 +62,6 @@
             {
                 throw new UserNotAuthorizedException();
             }
-
-            user.Courses.Remove(course);
 
             this.data.Courses.Delete(course);
 
@@ -108,9 +105,7 @@
                 throw new UserNotFoundException();
             }
 
-            var courses = this.data.Courses
-                                   .All()
-                                   .Where(c => c.RegisteredStudents.Any(s => s.Id != user.Id));
+            var courses = this.data.Courses.All().AsParallel();
                                         
             return courses.AsEnumerable();
         }
@@ -125,7 +120,17 @@
             }
 
             var courses = this.data.Courses.All()
-                                           .Where(c => c.RegisteredStudents.Any(s => s.Id == user.Id));
+                                           .Where(c => c.ApplicationUsers.Any(s => s.Id == user.Id));
+
+            var allCourses = this.data.Courses.All().ToList();
+
+            //var firstCourse = allCourses[0];
+
+            //var firstCourseRegistered = firstCourse.RegisteredStudents.ToList();
+
+            //var secondCourse = allCourses[1];
+
+            //var secondCourseRegistered = secondCourse.RegisteredStudents.ToList();
                                    
             return courses.AsEnumerable();
         }
@@ -168,6 +173,18 @@
             return courses;
         }
 
+        public double GetUserCurrentPoints(string username)
+        {
+            var user = this.GetUserByUsername(username);
+
+            if (user == null)
+            {
+                throw new UserNotFoundException();
+            }
+
+            return user.CurrentStudentPoints;
+        }
+
         public void RegisterToCourse(int courseId, string username)
         {
             var course = this.data.Courses.All().FirstOrDefault(c => c.Id == courseId);
@@ -184,20 +201,60 @@
                 throw new UserNotFoundException();
             }
 
-            bool isUserAlreadyRegistered = course.RegisteredStudents.Any(s => s.Id == currentUser.Id);
+            bool isUserAlreadyRegistered = currentUser.Courses.Any(c => c.Id == course.Id);
 
             if (isUserAlreadyRegistered)
             {
                 throw new AlreadyRegisteredToCourseException();
             }
 
-            if (currentUser.CurrentStudentPoints < course.CoursePoints)
+            if ((currentUser.CurrentStudentPoints + course.CoursePoints) > currentUser.StudentMaxPoints)
+            {
+                throw new MaxedCoursePointsException();
+            }
+
+            course.ApplicationUsers.Add(currentUser);
+            this.data.Courses.Update(course);
+
+            currentUser.Courses.Add(course);
+            currentUser.CurrentStudentPoints += course.CoursePoints;
+            this.data.Users.Update(currentUser);
+
+            this.data.SaveChanges();
+        }
+
+        public void UnregisterFromCourse(int courseId, string username)
+        {
+            var course = this.data.Courses.All().FirstOrDefault(c => c.Id == courseId);
+
+            if (course == null)
+            {
+                throw new CourseNotFoundException();
+            }
+
+            var currentUser = this.GetUserByUsername(username);
+
+            if (currentUser == null)
+            {
+                throw new UserNotFoundException();
+            }
+
+            bool isUserRegistered = currentUser.Courses.Any(c => c.Id == course.Id);
+
+            if (isUserRegistered == false)
+            {
+                throw new NotRegisteredToCourseException();
+            }
+
+            if ((currentUser.CurrentStudentPoints - course.CoursePoints) < 0D)
             {
                 throw new InsufficientCoursePointsException();
             }
 
-            course.RegisteredStudents.Add(currentUser);
+            course.ApplicationUsers.Remove(currentUser);
             this.data.Courses.Update(course);
+
+            currentUser.Courses.Remove(course);
 
             currentUser.CurrentStudentPoints -= course.CoursePoints;
             this.data.Users.Update(currentUser);

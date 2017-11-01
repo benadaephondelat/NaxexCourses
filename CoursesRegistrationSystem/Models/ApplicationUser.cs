@@ -9,8 +9,6 @@
 
     public class ApplicationUser : IdentityUser
     {
-        private ICollection<Course> courses;
-
         public ApplicationUser()
         {
             this.Courses = new HashSet<Course>();
@@ -19,18 +17,10 @@
         [Required]
         public double CurrentStudentPoints { get; set; }
 
-        public virtual ICollection<Course> Courses
-        {
-            get
-            {
-                return this.courses;
-            }
+        [Required]
+        public double StudentMaxPoints { get; set; }
 
-            set
-            {
-                this.courses = value;
-            }
-        }
+        public virtual ICollection<Course> Courses { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {

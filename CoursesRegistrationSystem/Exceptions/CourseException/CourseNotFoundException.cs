@@ -9,6 +9,8 @@
     [Serializable]
     public class CourseNotFoundException : MainApplicationException
     {
+        public static new string CustomMessage = "CourseNotFoundException";
+
         public CourseNotFoundException() : base()
         {
         }

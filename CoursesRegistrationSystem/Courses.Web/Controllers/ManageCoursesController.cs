@@ -1,7 +1,6 @@
 ﻿namespace Courses.Web.Controllers
 {
     using System.Web.Mvc;
-
     using Constants;
     using ServiceLayer.Interfaces;
     using Models.ManageCourses;
@@ -11,7 +10,7 @@
     using AutoMapper;
     using global::Models;
 
-    [CheckIfLoggedInFilter]
+    [CheckIfLoggedInFilter, CheckIfUserSessionIsExpired("Account", "Login")]
     public class ManageCoursesController : BaseController
     {
         private readonly ICoursesService coursesService;
@@ -76,7 +75,7 @@
             var result = new
             {
                 result = WebConstants.RedirectType,
-                url = Url.Action(WebConstants.EditCoursesAction, WebConstants.ManageCoursesController,
+                url = Url.Action("EditUserCourse", WebConstants.ManageCoursesController,
                 new { @courseId = courseId })
             };
 

@@ -82,7 +82,26 @@
         /// <exception cref="UserNotFoundException"></exception>
         /// <exception cref="CourseNotFoundException"></exception>
         /// <exception cref="AlreadyRegisteredToCourseException"></exception>
-        /// <exception cref="InsufficientCoursePointsException"></exception>
+        /// <exception cref="MaxedCoursePointsException"></exception>
         void RegisterToCourse(int courseId, string username);
+
+        /// <summary>
+        /// Unregisters a user to a given course or throws an exception
+        /// </summary>
+        /// <param name="courseId">id of the course to register to</param>
+        /// <param name="username">username of the current user</param>
+        /// <exception cref="UserNotFoundException"></exception>
+        /// <exception cref="CourseNotFoundException"></exception>
+        /// <exception cref="NotRegisteredToCourseException"></exception>
+        /// <exception cref="InsufficientCoursePointsException"></exception>
+        void UnregisterFromCourse(int courseId, string username);
+
+        /// <summary>
+        /// Returns the current points to a given user or throws an exception
+        /// </summary>
+        /// <param name="username">username of the current user</param>
+        /// <exception cref="UserNotFoundException"></exception>
+        /// <returns>double</returns>
+        double GetUserCurrentPoints(string username);
     }
 }

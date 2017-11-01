@@ -139,7 +139,8 @@ namespace Courses.Web.Controllers
                 {
                     UserName = model.Email,
                     Email = model.Email,
-                    CurrentStudentPoints = UserConstants.MaxPoints
+                    CurrentStudentPoints = UserConstants.StartingPoints,
+                    StudentMaxPoints = UserConstants.MaxPoints
                 };
 
                 var result = await UserManager.CreateAsync(user, model.Password);

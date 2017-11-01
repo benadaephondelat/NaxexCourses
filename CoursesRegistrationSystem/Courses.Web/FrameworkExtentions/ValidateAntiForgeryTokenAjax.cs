@@ -5,7 +5,7 @@
     using System.Web.Mvc;
 
     /// <summary>
-    /// Validates AntiForgeryToken for Ajax Requests.
+    /// Validates AntiForgeryToken for custom Ajax Requests.
     /// </summary>
     public class ValidateAntiForgeryTokenAjax : FilterAttribute, IAuthorizationFilter
     {

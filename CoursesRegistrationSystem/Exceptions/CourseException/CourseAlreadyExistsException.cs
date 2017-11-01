@@ -9,6 +9,8 @@
     [Serializable]
     public class CourseAlreadyExistsException : MainApplicationException
     {
+        public static new string CustomMessage = "CourseAlreadyExistsException";
+
         public CourseAlreadyExistsException() : base()
         {
         }

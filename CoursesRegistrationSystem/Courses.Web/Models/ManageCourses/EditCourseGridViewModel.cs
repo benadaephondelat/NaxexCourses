@@ -19,7 +19,7 @@ namespace Courses.Web.Models.ManageCourses
         public void CreateMappings(IConfiguration configuration)
         {
             configuration.CreateMap<Course, EditCourseGridViewModel>()
-                         .ForMember(vm => vm.RegisteredStudents, opt => opt.MapFrom(s => s.RegisteredStudents.Count()));
+                         .ForMember(vm => vm.RegisteredStudents, opt => opt.MapFrom(s => s.ApplicationUsers.Count()));
         }
     }
 }

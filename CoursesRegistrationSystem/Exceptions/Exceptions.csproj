@@ -43,6 +43,8 @@
     <Compile Include="CourseException\AlreadyRegisteredToCourseException.cs" />
     <Compile Include="CourseException\CourseNotFoundException.cs" />
     <Compile Include="CourseException\InsufficientCoursePointsException.cs" />
+    <Compile Include="CourseException\MaxedCoursePointsException.cs" />
+    <Compile Include="CourseException\NotRegisteredToCourseException.cs" />
     <Compile Include="MainApplicationException.cs" />
     <Compile Include="CourseException\CourseAlreadyExistsException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

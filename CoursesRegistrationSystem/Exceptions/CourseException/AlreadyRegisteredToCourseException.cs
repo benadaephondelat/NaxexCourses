@@ -9,6 +9,8 @@
     [Serializable]
     public class AlreadyRegisteredToCourseException : MainApplicationException
     {
+        public static new string CustomMessage = "AlreadyRegisteredToCourseException";
+
         public AlreadyRegisteredToCourseException() : base()
         {
         }

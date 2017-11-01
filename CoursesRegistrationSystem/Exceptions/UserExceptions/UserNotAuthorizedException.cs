@@ -9,6 +9,8 @@
     [Serializable]
     public class UserNotAuthorizedException : MainApplicationException
     {
+        public static new string CustomMessage = "UserNotAuthorizedException";
+
         public UserNotAuthorizedException() : base()
         {
         }

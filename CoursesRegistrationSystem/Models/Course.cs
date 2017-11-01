@@ -2,15 +2,12 @@
 {
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
 
     public class Course
     {
-        private ICollection<ApplicationUser> registeredStudents;
-
         public Course()
         {
-            this.RegisteredStudents = new HashSet<ApplicationUser>();
+            this.ApplicationUsers = new HashSet<ApplicationUser>();
         }
 
         [Key]
@@ -26,20 +23,6 @@
 
         public string CourseCreatorId { get; set; }
 
-        [ForeignKey("CourseCreatorId")]
-        public virtual ApplicationUser CourseCreator { get; set; }
-
-        public virtual ICollection<ApplicationUser> RegisteredStudents
-        {
-            get
-            {
-                return this.registeredStudents;
-            }
-
-            set
-            {
-                this.registeredStudents = value;
-            }
-        }
+        public ICollection<ApplicationUser> ApplicationUsers { get; set; }
     }
 }

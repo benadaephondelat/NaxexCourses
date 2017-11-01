@@ -17,6 +17,21 @@
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<ApplicationDbContext, Configuration>());
         }
 
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<ApplicationUser>()
+                        .HasMany<Course>(s => s.Courses)
+                        .WithMany(c => c.ApplicationUsers)
+                        .Map(cs =>
+                        {
+                            cs.MapLeftKey("ApplicationUserRefId");
+                            cs.MapRightKey("CourseRefId");
+                            cs.ToTable("CoursesWithStudents");
+                        });
+
+            base.OnModelCreating(modelBuilder);
+        }
+
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();

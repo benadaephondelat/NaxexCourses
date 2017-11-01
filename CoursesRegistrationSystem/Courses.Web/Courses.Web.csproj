@@ -227,15 +227,20 @@
     <Compile Include="Controllers\ListCoursesController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ManageCoursesController.cs" />
+    <Compile Include="FrameworkExtentions\AlreadyRegisteredExceptionHandler.cs" />
     <Compile Include="FrameworkExtentions\AntiForgeryTokenHelper.cs" />
     <Compile Include="FrameworkExtentions\CheckIfLoggedInFilter.cs" />
+    <Compile Include="FrameworkExtentions\CheckIfUserSessionIsExpired.cs" />
     <Compile Include="FrameworkExtentions\CheckModelState.cs" />
+    <Compile Include="FrameworkExtentions\ExceptionHandler.cs" />
+    <Compile Include="FrameworkExtentions\GlobalExceptionFilter.cs" />
     <Compile Include="FrameworkExtentions\Mappings\AutoMapperConfig.cs" />
     <Compile Include="FrameworkExtentions\Mappings\AutoMapperExtensions.cs" />
     <Compile Include="FrameworkExtentions\Mappings\IHaveCustomMappings.cs" />
     <Compile Include="FrameworkExtentions\Mappings\IMapFrom.cs" />
     <Compile Include="FrameworkExtentions\Mappings\IMapTo.cs" />
     <Compile Include="FrameworkExtentions\Mappings\TypesMap.cs" />
+    <Compile Include="FrameworkExtentions\MaxedCoursePointsEceptionHandler.cs" />
     <Compile Include="FrameworkExtentions\UserIdentityHelper.cs" />
     <Compile Include="FrameworkExtentions\ValidateAntiForgeryTokenAjax.cs" />
     <Compile Include="Global.asax.cs">
@@ -324,6 +329,9 @@
     <Content Include="Views\Shared\MvcGrid\_AjaxGrid.cshtml" />
     <Content Include="Views\ManageCourses\EditUserCourse.cshtml" />
     <Content Include="Views\ListCourses\Index.cshtml" />
+    <Content Include="Views\ListCourses\_AvailableCourses.cshtml" />
+    <Content Include="Views\ListCourses\_RegisteredCourses.cshtml" />
+    <Content Include="Views\Home\Error.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -344,6 +352,10 @@
     <ProjectReference Include="..\Constants\Constants.csproj">
       <Project>{222F56EF-19F9-40ED-8B6B-1C68F98FEEB3}</Project>
       <Name>Constants</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Exceptions\Exceptions.csproj">
+      <Project>{A9D75643-37DB-4914-BA38-6F1532B6F1F2}</Project>
+      <Name>Exceptions</Name>
     </ProjectReference>
     <ProjectReference Include="..\Models\Models.csproj">
       <Project>{B1A87A1B-83DA-4105-B2BF-615BD9151E1E}</Project>

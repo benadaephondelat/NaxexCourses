@@ -9,7 +9,7 @@
     [Serializable]
     public abstract class MainApplicationException : Exception
     {
-        public static string CustomMessage = "TicTacToe Main Application Exception.";
+        public static new string CustomMessage = "Courses Registration System Main Exception.";
 
         public MainApplicationException() : base()
         {

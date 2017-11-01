@@ -9,6 +9,8 @@
     [Serializable]
     public class InsufficientCoursePointsException : MainApplicationException
     {
+        public static new string CustomMessage = "InsufficientCoursePointsException";
+
         public InsufficientCoursePointsException() : base()
         {
         }

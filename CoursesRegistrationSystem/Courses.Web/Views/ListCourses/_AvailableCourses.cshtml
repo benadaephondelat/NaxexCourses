@@ -1,0 +1,52 @@
+﻿@using Courses.Web.FrameworkExtentions
+
+@model IEnumerable<Courses.Web.Models.ListCourses.CourseListViewModel>
+
+@if (Model.Any())
+{
+    <input type="hidden" id="token" value="@AntiForgeryTokenHelper.GetAntiForgeryToken()" />
+
+    <ul class="list-group">
+        @foreach (var availableCourse in Model)
+        {
+            <li class="list-group-item">@availableCourse.CourseName</li>
+            <li class="list-group-item">@availableCourse.CoursePoints</li>
+            <input type="submit"
+                   value="Register"
+                   data-course-id="@availableCourse.Id"
+                   class="btn btn-primary btn-lg text-center register-course-button" />
+        }
+    </ul>
+}
+else
+{
+    <h2>Currently there are not available courses, you can create one if you want to</h2>
+    @Html.ActionLink("Create Course", "CreateNewCourse", "ManageCourses")
+}
+
+<input type="hidden" data-toggle="modal" data-target="#myModal" id="open-modal" />
+
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog" id="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Something went wrong</h4>
+            </div>
+            <div class="modal-body">
+                <p id="modal-text"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<style>
+    #modal-dialog {
+        margin-left: -22%;
+        margin-top: 12%;
+    }
+</style>

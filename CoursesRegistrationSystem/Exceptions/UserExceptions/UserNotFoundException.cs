@@ -9,6 +9,8 @@
     [Serializable]
     public class UserNotFoundException : MainApplicationException
     {
+        public static new string CustomMessage = "UserNotFoundException";
+
         public UserNotFoundException() : base()
         {
         }

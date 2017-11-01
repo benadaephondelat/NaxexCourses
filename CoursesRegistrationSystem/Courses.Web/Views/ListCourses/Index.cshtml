@@ -1,6 +1,4 @@
-﻿@model Courses.Web.Models.ListCourses.CoursesListViewModel
-
-@{
+﻿@{
     ViewBag.Title = "Index";
 }
 
@@ -9,74 +7,47 @@
 <h2>Index</h2>
 
 <div id="courses-container">
-
+    <h2>Available Courses</h2>
     <div id="available-courses-container">
-
-        <h2>Available Courses</h2>
-
-        @if (Model.AvailableCourses.Any())
-        {
-            <ul class="list-group">
-                @foreach (var availableCourse in Model.AvailableCourses)
-                {
-                    <li class="list-group-item">@availableCourse.CourseName</li>
-                    <li class="list-group-item">@availableCourse.CoursePoints</li>
-                    <li>
-                        @using (Ajax.BeginForm("RegisterToCourse", "ListCourses", new { @courseId = availableCourse.Id }, new AjaxOptions()
-                        {
-                            InsertionMode = InsertionMode.Replace,
-                            UpdateTargetId = "courses-container"
-                        }))
-                        {
-                            @Html.AntiForgeryToken()
-
-                            <div class="form-group">
-                                <input type="submit" value="Register" class="btn btn-primary btn-lg text-center" />
-                            </div>
-                        }
-                    </li>
-                }
-            </ul>
-        }
-        else
-        {
-            <h2>Currently there are not available courses, you can create one if you want to</h2>
-            @Html.ActionLink("Create Course", "CreateNewCourse", "ManageCourses")
-        }
+        @Html.Action("GetAvailableCourses")
     </div>
 
+    <h2>Registered Courses</h2>
     <div id="registered-courses-container">
-
-        <h2>Registered Courses</h2>
-
-        @if (Model.RegisteredCourses.Any())
-        {
-            <ul class="list-group">
-                @foreach (var registeredCourse in Model.RegisteredCourses)
-                {
-                    <li class="list-group-item">@registeredCourse.CourseName</li>
-                    <li class="list-group-item">@registeredCourse.CoursePoints</li>
-                    <li>
-                        @using (Ajax.BeginForm("UnregisterFromCourse", "ListCourses", new { @courseId = registeredCourse.Id }, new AjaxOptions()
-                        {
-                            InsertionMode = InsertionMode.Replace,
-                            UpdateTargetId = "courses-container"
-                        }))
-                        {
-                            @Html.AntiForgeryToken()
-
-                            <div class="form-group">
-                                <input type="submit" value="Unregister" class="btn btn-primary btn-lg text-center" />
-                            </div>
-                        }
-                    </li>
-                }
-            </ul>
-        }
-        else
-        {
-            <h2>You are not registered to any courses yet.</h2>
-        }
+        @Html.Action("GetRegisteredCourses")
     </div>
-
 </div>
+
+<script src="~/Scripts/jquery-2.1.4.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<script>
+
+    $('.register-course-button').off().on('click', function (event) {
+        var token = $('#token').attr('value');
+        var data = $(event.target).attr('data-course-id');
+
+        var data = JSON.stringify({
+            courseId: data
+        });
+
+        $.ajax({
+            url: '/ListCourses/RegisterToCourse',
+            type: 'POST',
+            headers: { 'RequestVerificationToken': token },
+            data: data,
+            contentType: 'application/json',
+            dataType: 'html',
+            async: true
+        }).done(function (result) {
+            window.location = window.location.origin + '/ListCourses/Index'
+        }).fail(function (response) {
+            if (response.status === 400) {
+                $('#modal-text').text(response.statusText);
+                $('#open-modal').click();
+            }
+        });
+    });
+
+</script>

@@ -9,7 +9,7 @@
     using AutoMapper;
     using Constants;
 
-    [CheckIfLoggedInFilter]
+    [CheckIfLoggedInFilter, CheckIfUserSessionIsExpired("Account", "Login")]
     public class ListCoursesController : BaseController
     {
         private readonly ICoursesService coursesService;
@@ -26,33 +26,52 @@
         [HttpGet]
         public ActionResult Index()
         {
+            return View(WebConstants.IndexView);
+        }
+
+        [HttpGet]
+        public ActionResult GetAvailableCourses()
+        {
             string username = base.CurrentUserName();
 
             IEnumerable<Course> availableCourses = this.coursesService.GetAllAvailableCourses(username);
 
-            IEnumerable<Course> registeredCourses = this.coursesService.GetAllRegisteredCourses(username);
+            IEnumerable<CourseListViewModel> viewModel = Mapper.Map<IEnumerable<CourseListViewModel>>(availableCourses);
 
-            CoursesListViewModel viewModel = new CoursesListViewModel();
-
-            viewModel.AvailableCourses = Mapper.Map<IEnumerable<CourseListViewModel>>(availableCourses);
-
-            viewModel.RegisteredCourses = Mapper.Map<IEnumerable<CourseListViewModel>>(registeredCourses);
-
-            //TODO Add available points to the view model
-            //var user = this.coursesService.GetUserByUsername(username);
-            //viewModel.AvailablePoints = user.AvailablePoints;
-
-            return View(WebConstants.IndexView, viewModel);
+            return PartialView("_AvailableCourses", viewModel);
         }
 
-        [HttpPost, ValidateAntiForgeryToken]
+        [HttpGet]
+        public ActionResult GetRegisteredCourses()
+        {
+            string username = base.CurrentUserName();
+
+            IEnumerable<Course> registeredCourses = this.coursesService.GetAllRegisteredCourses(username);
+
+            IEnumerable<CourseListViewModel> viewModel = Mapper.Map<IEnumerable<CourseListViewModel>>(registeredCourses);
+
+            return PartialView("_RegisteredCourses", viewModel);
+        }
+
+        [HttpPost, ValidateAntiForgeryTokenAjax]
+        [AlreadyRegisteredExceptionHandler, MaxedCoursePointsEceptionHandler]
         public ActionResult RegisterToCourse(int courseId)
         {
             string username = base.CurrentUserName();
 
             this.coursesService.RegisterToCourse(courseId, username);
 
-            return RedirectToAction(WebConstants.IndexView);
+            return Json(true);
+        }
+
+        [HttpPost, ValidateAntiForgeryToken]
+        public ActionResult UnregisterFromCourse(int courseId)
+        {
+            string username = base.CurrentUserName();
+
+            this.coursesService.UnregisterFromCourse(courseId, username);
+
+            return RedirectToAction("Index");
         }
     }
 }

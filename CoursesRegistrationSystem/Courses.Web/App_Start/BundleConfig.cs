@@ -10,12 +10,13 @@ namespace Courses.Web
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery")
                    .Include("~/Scripts/jquery-2.1.4.js")
-                   .Include("~/Scripts/jquery.validate.js")
-                   .Include("~/Scripts/jquery.unobtrusive-ajax.js")
-                   .Include("~/Scripts/jquery.validate.unobtrusive.js"));
+                   .Include("~/Scripts/jquery.validate*"));
+                   //.Include("~/Scripts/jquery.validate.js")
+                   //.Include("~/Scripts/jquery.unobtrusive-ajax.js")
+                   //.Include("~/Scripts/jquery.validate.unobtrusive.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
-                        "~/Scripts/jquery.validate*"));
+                       "~/Scripts/jquery.validate*"));
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
             // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.
@@ -34,6 +35,7 @@ namespace Courses.Web
                    .Include("~/Content/MvcGrid/mvc-grid.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/mvc-grid")
+                   .Include("~/Scripts/jquery-2.1.4.js")
                    .Include("~/Scripts/MvcGrid/mvc-grid.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/manageCoursesGridModule")
